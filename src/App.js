@@ -1,24 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+// import { useState } from "react";
+
+import AdminPage from "./components/AdminPage/AdminPage";
+import HomePage from "./components/HomePage/HomePage";
+import LoginPage from "./components/LoginPage/LoginPage";
+import MePage from "./components/MePage/MePage";
+import SignupPage from "./components/SignupPage/SignupPage";
+import SubscriptionPage from "./components/SubscriptionPage/SubscriptionPage";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>CSC309 Project Front End Main App</h1>
+      {/* You can add pages here to test them */}
+      <AdminPage></AdminPage>
+    </>
   );
 }
 
