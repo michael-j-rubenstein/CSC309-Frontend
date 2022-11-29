@@ -1,18 +1,19 @@
 // import { useState } from "react";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AdminPage from "./components/AdminPage/AdminPage";
-import HomePage from "./components/HomePage/HomePage";
-import LoginPage from "./components/LoginPage/LoginPage";
-import MePage from "./components/MePage/MePage";
-import SignupPage from "./components/SignupPage/SignupPage";
-import SubscriptionPage from "./components/SubscriptionPage/SubscriptionPage";
+import Nav from "./components/Layout/Nav";
+import AdminPage from "./pages/Admin/AdminPage";
+import HomePage from "./pages/Home/HomePage";
+import LoginPage from "./pages/Login/LoginPage";
+import MePage from "./pages/Me/MePage";
+import SignupPage from "./pages/Signup/SignupPage";
+import SubscriptionPage from "./pages/Subscription/SubscriptionPage";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/">
+        <Route path="/" element={<Nav></Nav>}>
           <Route index element={<HomePage />} />
           <Route path="login/" element={<LoginPage />} />
           <Route path="signup/" element={<SignupPage />} />
