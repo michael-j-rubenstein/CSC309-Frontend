@@ -1,0 +1,48 @@
+
+.nav {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 1rem 15%;
+}
+
+.link {
+    all: unset;
+    color: rgb(113, 113, 113);
+    font-weight: 500;
+    padding: 0 0.3rem;
+    padding-bottom: calc(0.3rem + 2px);
+}
+
+.link:hover {
+    padding-bottom: 0.3rem;
+    border-bottom: 2px solid rgb(113, 113, 113);
+    color: #222222;
+    cursor: pointer;
+}
+
+.link:focus {
+    animation: push 0.15s ease-in forwards;
+}
+
+.selected {
+    padding-bottom: 0.3rem;
+    color: #222222;
+    border-bottom: 2px solid #222222;
+}
+
+.link.selected:hover {
+    padding-bottom: 0.3rem;
+    color: #222222;
+    border-bottom: 2px solid #222222;
+    cursor: default;
+}
+
+@keyframes push {
+    50% {
+        transform: scale(0.9);
+    }
+    70% {
+        transform: scale(0.85);
+    }
+}
