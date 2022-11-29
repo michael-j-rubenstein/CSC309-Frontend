@@ -1,5 +1,6 @@
 // import { useState } from "react";
 
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AdminPage from "./components/AdminPage/AdminPage";
 import HomePage from "./components/HomePage/HomePage";
 import LoginPage from "./components/LoginPage/LoginPage";
@@ -9,11 +10,18 @@ import SubscriptionPage from "./components/SubscriptionPage/SubscriptionPage";
 
 function App() {
   return (
-    <>
-      <h1>CSC309 Project Front End Main App</h1>
-      {/* You can add pages here to test them */}
-      <AdminPage></AdminPage>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/">
+          <Route index element={<HomePage />} />
+          <Route path="login/" element={<LoginPage />} />
+          <Route path="signup/" element={<SignupPage />} />
+          <Route path="me/" element={<MePage />} />
+          <Route path="subscription/" element={<SubscriptionPage />} />
+          <Route path="admin/" element={<AdminPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
