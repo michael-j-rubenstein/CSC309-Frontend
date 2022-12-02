@@ -6,8 +6,6 @@ import styles from "./Nav.module.css";
 const Nav = () => {
   const [page, setPage] = useState(0);
 
-  const onClickHandler = () => {};
-
   return (
     <>
       <nav className={styles.nav}>

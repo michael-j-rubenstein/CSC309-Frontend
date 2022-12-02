@@ -1,0 +1,8 @@
+.tag {
+    width: fit-content;
+    block-size: fit-content;
+    padding: 0.3rem 1rem;
+    border-radius: 14px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    white-space: nowrap;
+}
