@@ -1,19 +1,29 @@
-import TagList from "../../components/UI/TagList";
 import Hero from "../../components/Hero/Hero";
-import Input from "../../components/Forms/Input";
 import { useRef } from "react";
+import Wrapper from "../../components/Layout/Wrapper";
+import LocationInput from "../../components/Forms/LocationInput";
+import Title from "../../components/Text/Title";
 
 const HomePage = () => {
-  const locationInputRef = useRef();
+  const latInputRef = useRef();
+  const longInputRef = useRef();
+
+  const locationSubmitHandler = (event) => {
+    event.preventDefault();
+    console.log(latInputRef.current.value, longInputRef.current.value);
+  };
+
   return (
     <>
       <Hero></Hero>
-      <p>lorea jsdajsdl aksjdaljsd </p>
-      <Input
-        ref={locationInputRef}
-        label="Latitude"
-        input={{ type: "number", id: "aaaa", min: -180, max: 180 }}
-      ></Input>
+      <Wrapper>
+        <Title>Find a club!</Title>
+        <LocationInput
+          latRef={latInputRef}
+          longRef={longInputRef}
+          submitHandler={locationSubmitHandler}
+        ></LocationInput>
+      </Wrapper>
     </>
   );
 };
