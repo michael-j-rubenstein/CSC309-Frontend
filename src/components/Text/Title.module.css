@@ -1,0 +1,19 @@
+
+.title {
+    font-size: 3rem;
+    text-align: center;
+    margin-top: 5rem;
+    margin-bottom: 4rem;
+    position: relative;
+    padding-bottom: 1.5rem;
+}
+
+.title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: calc(50% - 80px);
+    width: 160px;
+    height: 4px;
+    background: #df3124;
+}
