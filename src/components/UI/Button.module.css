@@ -18,3 +18,18 @@
 .btn.primary:hover {
     background: #c72a1e;
 }
+
+.plain {
+    all: unset;
+    color: rgb(113, 113, 113);
+    font-weight: 500;
+    padding: 0 0.3rem;
+    padding-bottom: calc(0.3rem + 2px);
+}
+
+.btn.plain:hover {
+    padding-bottom: 0.3rem;
+    /* border-bottom: 2px solid rgb(113, 113, 113); */
+    color: #222222;
+    cursor: pointer;
+}
