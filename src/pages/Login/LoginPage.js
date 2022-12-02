@@ -17,7 +17,9 @@ const LoginPage = () => {
           placeholder="Password"
           className={styles["form-input"]}
         ></input>
-        <Link to="/signup/">Don't have an account?</Link>
+        <Link to="/signup/" className={styles["form-redirect"]}>
+          Don't have an account?
+        </Link>
         <button className={styles["form-btn"]}>Sign in</button>
         <p className={styles["copyright-tag"]}>Copyright &copy; 2022</p>
       </div>
