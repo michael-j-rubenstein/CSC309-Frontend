@@ -1,0 +1,45 @@
+
+.studio-wrapper {
+    border-bottom: 2px solid #ccc;
+    padding: 1.5rem 2rem;
+    color: rgb(113, 113, 113);
+}
+
+.studio-wrapper:last-of-type{
+    border: 0;
+}
+
+.studio-name {
+    font-size: 2rem;
+    margin: 0;
+    color: #2f2f2f;
+}
+
+.studio-address {
+    font-size: 1.4rem;
+    margin: 1.5rem 0 0;
+}
+
+.studio-other {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.studio-distance {
+    font-size: 1.4rem;
+    margin: 1rem 0;
+}
+
+.studio-btn-wrapper {
+    display: flex;
+    gap: 1rem
+}
+
+.studio-btn {
+    font-size: 1.3rem
+}
+
+.highlight {
+    font-weight: 500;
+}
