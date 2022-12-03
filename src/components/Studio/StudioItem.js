@@ -16,7 +16,12 @@ const StudioItem = (props) => {
       <div className={styles["studio-other"]}>
         <p className={styles["studio-distance"]}>{distance} kilometers away</p>
         <div className={styles["studio-btn-wrapper"]}>
-          <a href={directions} className={styles["btn-link"]} target="_blank">
+          <a
+            href={directions}
+            className={styles["btn-link"]}
+            target="_blank"
+            rel="noreferrer"
+          >
             <Button className={styles["studio-btn"]} btnColor="plain">
               Directions
             </Button>

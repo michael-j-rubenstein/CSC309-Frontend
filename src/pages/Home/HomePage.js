@@ -1,5 +1,5 @@
 import Hero from "../../components/Hero/Hero";
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import Wrapper from "../../components/Layout/Wrapper";
 import LocationInput from "../../components/Forms/LocationInput";
 import Title from "../../components/Text/Title";
@@ -12,10 +12,21 @@ const HomePage = () => {
   const latInputRef = useRef();
   const longInputRef = useRef();
   const [studios, setStudios] = useState([]);
+  const [searched, setSearched] = useState(false);
 
-  const locationSubmitHandler = (event) => {
+  const locationSubmitHandler = async (event) => {
     event.preventDefault();
-    console.log(latInputRef.current.value, longInputRef.current.value);
+
+    var bearer = "Bearer " + process.env.REACT_APP_TOKEN;
+    console.log(bearer)
+
+    const data = await fetch(process.env.REACT_APP_BACKEND_URL + "studios/", {
+      method: "POST",
+      mode: "no-cors",
+      headers: { 'Authorization': bearer, 'Content-Type': 'application/json'}
+    });
+
+    setSearched(true);
     setStudios({
       "GoodLife Fitness Toronto Richmond and John": {
         id: 1,
@@ -26,7 +37,7 @@ const HomePage = () => {
           "https://www.google.com/maps/dir/633+Bay+St.,+Toronto,+ON+M5G+2G4,+Canada/GoodLife+Fitness+Toronto+Richmond+and+John,+267+Richmond+St+W,+Toronto,+ON+M5V+3M6/@43.648754,-79.4094495,15z/data=!4m14!4m13!1m5!1m1!1s0x882b34ca53f5a36b:0x9c6da32c964a3a2!2m2!1d-79.3832236!2d43.6567671!1m5!1m1!1s0x882b34da9f48e43b:0x17f1fdd1a8210e42!2m2!1d-79.39194!2d43.648754!3e3",
       },
       "second studio": {
-        id: 1,
+        id: 2,
         name: "9Round Fitness",
         address: "777 Bay St. M219, Toronto, ON",
         distance: 2,
@@ -39,10 +50,16 @@ const HomePage = () => {
   var studio_list = Object.keys(studios);
   studio_list = studio_list.map((studio_name) => {
     const data = studios[`${studio_name}`];
-    return <StudioItem id={data.id} data={{ ...data }}></StudioItem>;
+    return <StudioItem key={data.id} data={{ ...data }}></StudioItem>;
   });
 
-  // console.log(studio_list);
+  const error_message = searched ? (
+    <p className={styles.error}> No studios found, please try again! </p>
+  ) : (
+    <p className={styles.error}>
+      Please enter your information above and search!
+    </p>
+  );
 
   return (
     <>
@@ -55,15 +72,7 @@ const HomePage = () => {
           submitHandler={locationSubmitHandler}
         ></LocationInput>
         {/* <Title>Studios</Title> */}
-        <Card>
-          {studio_list.length === 0 ? (
-            <p className={styles.error}>
-              No Studios Found. Please Search Again
-            </p>
-          ) : (
-            studio_list
-          )}
-        </Card>
+        <Card>{studio_list.length === 0 ? error_message : studio_list}</Card>
       </Wrapper>
     </>
   );
