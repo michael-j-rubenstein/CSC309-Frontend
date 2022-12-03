@@ -1,5 +1,7 @@
 .form {
-    margin-bottom: 50rem;
+    /* This margin is only for testing, can be deleted later */
+    /* margin-bottom: 50rem; */
+    margin-bottom: 3rem;
     position: relative;
 }
 
@@ -44,11 +46,7 @@
 }
 
 .btn-show-options {
-    position: absolute;
-    margin-top: 1.5rem;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    margin-top: 1.2rem;
     font-size: 1.2rem;
     font-weight: 400;
 }

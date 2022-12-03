@@ -28,7 +28,6 @@
 }
 
 .btn.plain:hover {
-    padding-bottom: 0.3rem;
     /* border-bottom: 2px solid rgb(113, 113, 113); */
     color: #222222;
     cursor: pointer;

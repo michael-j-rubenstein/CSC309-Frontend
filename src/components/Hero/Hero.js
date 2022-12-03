@@ -8,9 +8,11 @@ const Hero = () => {
           <span className={styles["hero__small-content"]}>EVERYBODY CAN</span>{" "}
           <br /> BE THEIR PERFECT SELF
         </h1>
+        {/* All credit of the photo goes to Heloisa Freitas, 
+        source: https://www.pexels.com/photo/photo-of-woman-in-boxing-gloves-1608099/ */}
         <img
           src={require("../../images/boxing.jpg")}
-          alt={"Image of boxing woman"}
+          alt={"boxing woman"}
           className={styles["hero__img"]}
         ></img>
       </div>
