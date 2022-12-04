@@ -5,6 +5,8 @@ import LocationInput from "../../components/Forms/LocationInput";
 import Title from "../../components/Text/Title";
 import Card from "../../components/Layout/Card";
 
+import axios, { Axios } from "axios";
+
 import styles from "./HomePage.module.css";
 import StudioItem from "../../components/Studio/StudioItem";
 
@@ -17,14 +19,35 @@ const HomePage = () => {
   const locationSubmitHandler = async (event) => {
     event.preventDefault();
 
-    var bearer = "Bearer " + process.env.REACT_APP_TOKEN;
-    console.log(bearer)
+    var bearer =
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcwMTI3OTgxLCJpYXQiOjE2NzAxMjQzODEsImp0aSI6IjAzNGJmODc3NzdmYzRiODQ4NDExMTNhMzc3ZWI1ZDU0IiwidXNlcl9pZCI6Nn0.uyjPV3bJ3g5jB2LY7Ele6qw0e3-fkI5ZcuGNabsjTnQ";
+    console.log(bearer);
 
-    const data = await fetch(process.env.REACT_APP_BACKEND_URL + "studios/", {
-      method: "POST",
-      mode: "no-cors",
-      headers: { 'Authorization': bearer, 'Content-Type': 'application/json'}
-    });
+    const config = {
+      headers: {
+        Authorization: `${bearer}`,
+      },
+    };
+
+    axios
+      .post(
+        `${process.env.REACT_APP_BACKEND_URL}studios/`,
+        {
+          latitude: 1,
+          longitude: 2,
+          mode: "no-cors",
+        },
+        config
+      )
+      .then((res) => {
+        setStudios(res.data);
+      });
+
+    // const data = await fetch(process.env.REACT_APP_BACKEND_URL + "studios/", {
+    //   method: "POST",
+    //   mode: "no-cors",
+    //   headers: new Headers({ Authorization: bearer }),
+    // });
 
     setSearched(true);
     setStudios({
