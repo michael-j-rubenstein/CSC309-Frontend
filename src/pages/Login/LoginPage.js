@@ -2,8 +2,12 @@ import { Link } from "react-router-dom";
 import styles from "./LoginPage.module.css";
 
 const LoginPage = () => {
+  const dosomething = (event) => {
+    event.preventDefault();
+    console.log("hello");
+  };
   return (
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={dosomething}>
       <div className={styles["form-content"]}>
         <h1 className={styles["form-title"]}>Please sign in</h1>
         <input
