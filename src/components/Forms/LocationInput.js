@@ -12,21 +12,42 @@ const LocationInput = (props) => {
         className={styles["input-long"]}
         type="text"
         placeholder="Studio name (e.g. Athletic Center, 9Round)"
+        onChange={(event) =>
+          props.setFilterData({ ...props.filterData, name: event.target.value })
+        }
       />
       <input
         className={styles["input-long"]}
         type="text"
         placeholder="Amenities (e.g. Personal Training, Pool)"
+        onChange={(event) => {
+          props.setFilterData({
+            ...props.filterData,
+            amenities: event.target.value,
+          });
+        }}
       />
       <input
         className={styles["input-long"]}
         type="text"
         placeholder="Classes (e.g. Yoga, Karate)"
+        onChange={(event) => {
+          props.setFilterData({
+            ...props.filterData,
+            classes: event.target.value,
+          });
+        }}
       />
       <input
         className={styles["input-long"]}
         type="text"
         placeholder="Coaches (e.g. Kevin Hart, Kex Zhang)"
+        onChange={(event) => {
+          props.setFilterData({
+            ...props.filterData,
+            coaches: event.target.value,
+          });
+        }}
       />
       <div className={styles["options-wrapper"]}>
         <Button

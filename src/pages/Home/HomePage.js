@@ -15,13 +15,18 @@ const HomePage = () => {
   const longInputRef = useRef();
   const [studios, setStudios] = useState([]);
   const [searched, setSearched] = useState(false);
+  const [filterData, setFilterData] = useState({
+    name: "",
+    amenities: "",
+    classes: "",
+    coaches: "",
+  });
 
   const locationSubmitHandler = async (event) => {
     event.preventDefault();
 
     var bearer =
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcwMTI3OTgxLCJpYXQiOjE2NzAxMjQzODEsImp0aSI6IjAzNGJmODc3NzdmYzRiODQ4NDExMTNhMzc3ZWI1ZDU0IiwidXNlcl9pZCI6Nn0.uyjPV3bJ3g5jB2LY7Ele6qw0e3-fkI5ZcuGNabsjTnQ";
-    console.log(latInputRef.current.value);
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcwMjcxNzUzLCJpYXQiOjE2NzAyNjgxNTMsImp0aSI6IjcyNDUxOTMwM2RmODQ1NmE5ODNkODI0NjRlY2I2YWEwIiwidXNlcl9pZCI6Nn0.GwxJn8D-tyJyyBCfFXRiRjerMj5vS5m5j2syvm904GI";
 
     const config = {
       headers: {
@@ -31,6 +36,21 @@ const HomePage = () => {
 
     const user_latitude = latInputRef.current.value * 1;
     const user_longitude = longInputRef.current.value * 1;
+    const amenityArray =
+      filterData.amenities.length === 0 ? [] : filterData.amenities.split(",");
+    const classArray =
+      filterData.classes.length === 0 ? [] : filterData.classes.split(",");
+    const coachArray =
+      filterData.coaches.length === 0 ? [] : filterData.coaches.split(",");
+
+    console.log({
+      latitude: user_latitude,
+      longitude: user_longitude,
+      name: filterData.name,
+      amenities: amenityArray,
+      classes: classArray,
+      coaches: coachArray,
+    });
 
     axios
       .post(
@@ -38,19 +58,18 @@ const HomePage = () => {
         {
           latitude: user_latitude,
           longitude: user_longitude,
-          mode: "no-cors",
+          name: filterData.name,
+          amenities: amenityArray,
+          classes: classArray,
+          coaches: coachArray,
+          // mode: "no-cors",
         },
         config
       )
       .then((res) => {
+        console.log(res.data);
         setStudios(res.data);
       });
-
-    // const data = await fetch(process.env.REACT_APP_BACKEND_URL + "studios/", {
-    //   method: "POST",
-    //   mode: "no-cors",
-    //   headers: new Headers({ Authorization: bearer }),
-    // });
 
     setSearched(true);
   };
@@ -78,6 +97,8 @@ const HomePage = () => {
           latRef={latInputRef}
           longRef={longInputRef}
           submitHandler={locationSubmitHandler}
+          filterData={filterData}
+          setFilterData={setFilterData}
         ></LocationInput>
         {/* <Title>Studios</Title> */}
         <Card>{studio_list.length === 0 ? error_message : studio_list}</Card>
