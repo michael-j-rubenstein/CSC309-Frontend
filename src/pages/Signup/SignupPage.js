@@ -12,24 +12,33 @@ const SignupPage = () => {
   const [phone_number, setPhoneNumber] = useState('');
   const [first_name, setFirstName] = useState('');
   const [last_name, setLastName] = useState('');
+  const [selectedImage, setSelectedImage] = useState(null);
+
   const SignupPage = async (e) => {
     e.preventDefault();
-     axios
-      .post(
-        `${process.env.REACT_APP_BACKEND_URL}accounts/signup/`,
-        {
-          username: username,
-          password: password,
-          password2: password2,
-          email: email,
-          first_name: first_name,
-          last_name: last_name,
-          phone_number: phone_number,
+    const formData = new FormData();
+    formData.append("avatar", selectedImage);
+    formData.append("username", username);
+    formData.append("email", email);
+    formData.append("password", password2);
+    formData.append("password2", password2);
+    formData.append("phone_number", phone_number);
+    formData.append("first_name", first_name);
+    formData.append("last_name", last_name);
+    //console.log(formData);
+     axios({
+          method:"post",
+          url:  `${process.env.REACT_APP_BACKEND_URL}accounts/signup/`,
+          data: formData,
           mode: "no-cors",
+          headers: { "Content-Type": "multipart/form-data" },
         },
         {}
       )
       .then((res) => console.log(res.data));
+}
+const handleFileSelect = (event) => {
+  setSelectedImage(event.target.files[0])
 }
   return (
     <form className={styles.form} onSubmit={SignupPage}>
@@ -107,16 +116,20 @@ const SignupPage = () => {
           value={password2} onChange={(e) => setPassword2(e.target.value)}
         ></input>
 
-        <label className={styles["file-label"]} htmlFor="avatar">
+        <label className={styles["form-label"]} htmlFor="avatar">
           Avatar
         </label>
-        <input
-          type="file"
-          className={styles["file-input"]}
-          id="avatar"
-          // value={avatar} onChange={(e) => setAvatar(e.target.value)}
-        ></input>
-
+        <div>
+        <img
+            alt=""
+            className={`${selectedImage ? styles.img : styles["hide-img"]}`}
+            src={selectedImage ? URL.createObjectURL(selectedImage) : ""}
+          ></img>
+          <input
+            className={styles["file-input"]}
+            type="file" onChange={handleFileSelect}
+          />
+        </div>
         <Link to="/login/" className={styles["form-redirect"]}>
           Already have an account?
         </Link>

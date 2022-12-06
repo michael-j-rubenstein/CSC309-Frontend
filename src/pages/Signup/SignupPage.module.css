@@ -69,6 +69,19 @@
     border-radius: 20px;
 }
 
+.img {
+    margin-top: 1rem;
+    margin-left: 1.5rem;
+    width: 130px;
+    border-radius: 50%;
+    box-shadow: #df3124 0px 0px 3px 2px;
+    overflow: hidden;
+}
+
+.file-input{
+    text-align: left;
+}
+
 .form-btn:hover {
     color: rgb(255, 255, 255);
     cursor: pointer;
