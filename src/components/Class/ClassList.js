@@ -19,13 +19,15 @@ const ClassList = (props) => {
   };
 
   useEffect(() => {
-    // get classes data
-    axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}classes/schedule/`, config)
-      .then((res) => {
-        // console.log(res.data);
-        setClasses(res.data);
-      });
+    if (bearer) {
+      // get classes data
+      axios
+        .get(`${process.env.REACT_APP_BACKEND_URL}classes/schedule/`, config)
+        .then((res) => {
+          // console.log(res.data);
+          setClasses(res.data);
+        });
+    }
   }, []);
 
   // skip one class
@@ -66,21 +68,25 @@ const ClassList = (props) => {
       });
   };
 
+  const msg = bearer ? (
+    <h2 className={styles.alert}>You are not enrolled in any classes!</h2>
+  ) : (
+    <h2 className={styles.alert}>Please sign in to see your classes!</h2>
+  );
+
   const classItems =
-    classes.length === 0 ? (
-      <h2 className={styles.alert}>You are not enrolled in any classes!</h2>
-    ) : (
-      classes.map((class_obj) => {
-        return (
-          <ClassItem
-            key={class_obj.name + class_obj.date}
-            data={class_obj}
-            skipHandler={skipHandler}
-            quitHandler={quitHandler}
-          />
-        );
-      })
-    );
+    classes.length === 0
+      ? msg
+      : classes.map((class_obj) => {
+          return (
+            <ClassItem
+              key={class_obj.name + class_obj.date}
+              data={class_obj}
+              skipHandler={skipHandler}
+              quitHandler={quitHandler}
+            />
+          );
+        });
   return (
     <>
       <div className={styles["header"]}>
