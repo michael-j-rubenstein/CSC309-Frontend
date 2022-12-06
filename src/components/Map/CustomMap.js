@@ -25,8 +25,11 @@ const CustomMap = ({ google, locations = [], userLocation }) => {
         zoom={locations.length === 1 ? 18 : 13}
         disableDefaultUI={true}
       >
-        {locations.map((coords) => (
-          <Marker key={`${coords.lat} + ${coords.long}`} position={coords} />
+        {locations.map((coords, index) => (
+          <Marker
+            key={`${coords.lat} + ${coords.long} + ${index}`}
+            position={coords}
+          />
         ))}
       </Map>
     </div>
