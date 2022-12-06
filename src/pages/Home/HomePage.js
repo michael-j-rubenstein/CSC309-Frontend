@@ -9,6 +9,7 @@ import axios from "axios";
 
 import styles from "./HomePage.module.css";
 import StudioItem from "../../components/Studio/StudioItem";
+import CustomMap from "../../components/Map/CustomMap";
 
 
 const HomePage = () => {
@@ -16,6 +17,12 @@ const HomePage = () => {
   const longInputRef = useRef();
   const [studios, setStudios] = useState([]);
   const [searched, setSearched] = useState(false);
+  const [filterData, setFilterData] = useState({
+    name: "",
+    amenities: "",
+    classes: "",
+    coaches: "",
+  });
 
   const locationSubmitHandler = async (event) => {
     event.preventDefault();
@@ -24,6 +31,7 @@ const HomePage = () => {
       "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcwMjI0OTI4LCJpYXQiOjE2NzAyMjEzMjgsImp0aSI6IjAwMzQzZWYwOGRkNDRiNDg5MmY2ZTAyNmVlMWY4MmUyIiwidXNlcl9pZCI6M30.Hvm0CQPAbPb7nbDHtF9tjayue1q5pOtMMfn34coPdR8";
     console.log(latInputRef.current.value);
 
+
     const config = {
       headers: {
         // Authorization: `${bearer}`,
@@ -31,8 +39,20 @@ const HomePage = () => {
       },
     };
 
-    const user_latitude = latInputRef.current.value * 1;
-    const user_longitude = longInputRef.current.value * 1;
+    const user_latitude =
+      latInputRef.current.value !== ""
+        ? latInputRef.current.value * 1
+        : 43.6532;
+    const user_longitude =
+      longInputRef.current.value !== ""
+        ? longInputRef.current.value * 1
+        : -79.3832;
+    const amenityArray =
+      filterData.amenities.length === 0 ? [] : filterData.amenities.split(",");
+    const classArray =
+      filterData.classes.length === 0 ? [] : filterData.classes.split(",");
+    const coachArray =
+      filterData.coaches.length === 0 ? [] : filterData.coaches.split(",");
 
     axios
       .post(
@@ -40,24 +60,31 @@ const HomePage = () => {
         {
           latitude: user_latitude,
           longitude: user_longitude,
-          mode: "no-cors",
+          name: filterData.name,
+          amenities: amenityArray,
+          classes: classArray,
+          coaches: coachArray,
+          // mode: "no-cors",
         },
         config
       )
       .then((res) => {
         setStudios(res.data);
+        console.log(res.data);
       });
-
-    // const data = await fetch(process.env.REACT_APP_BACKEND_URL + "studios/", {
-    //   method: "POST",
-    //   mode: "no-cors",
-    //   headers: new Headers({ Authorization: bearer }),
-    // });
-
     setSearched(true);
   };
 
   var studio_list = Object.keys(studios);
+
+  const studio_latlng = studio_list.map((studio_name) => {
+    const latlng = {
+      lat: studios[`${studio_name}`].latitude,
+      lng: studios[`${studio_name}`].longitude,
+    };
+    return latlng;
+  });
+
   studio_list = studio_list.map((studio_name) => {
     const data = studios[`${studio_name}`];
     return <StudioItem key={data.id} data={{ ...data }}></StudioItem>;
@@ -71,6 +98,19 @@ const HomePage = () => {
     </p>
   );
 
+  var user_location = { lat: 43.6532, lng: -79.3832 };
+
+  if (
+    latInputRef.current !== undefined &&
+    longInputRef.current !== undefined &&
+    latInputRef.current.value !== "" &&
+    longInputRef.current.value !== ""
+  )
+    user_location = {
+      lat: latInputRef.current.value * 1,
+      lng: longInputRef.current.value * 1,
+    };
+
   return (
     <>
       <Hero></Hero>
@@ -80,8 +120,15 @@ const HomePage = () => {
           latRef={latInputRef}
           longRef={longInputRef}
           submitHandler={locationSubmitHandler}
+          filterData={filterData}
+          setFilterData={setFilterData}
         ></LocationInput>
-        {/* <Title>Studios</Title> */}
+        <Card className={styles.map}>
+          <CustomMap
+            userLocation={user_location}
+            locations={studio_latlng ? studio_latlng : []}
+          ></CustomMap>
+        </Card>
         <Card>{studio_list.length === 0 ? error_message : studio_list}</Card>
       </Wrapper>
     </>

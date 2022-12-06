@@ -20,6 +20,21 @@
     font-family: inherit;
 }
 
+.file-input {
+    border: 0;
+}
+
+.img {
+    margin-top: 1rem;
+    margin-left: 1.5rem;
+    width: 130px;
+    border-radius: 50%;
+    box-shadow: #df3124 0px 0px 3px 2px;
+}
+
+.hide-img {
+    display: none;
+}
 
 .btn-wrapper {
     display: flex;
