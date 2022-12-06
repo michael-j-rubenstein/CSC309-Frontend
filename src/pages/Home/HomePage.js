@@ -5,7 +5,7 @@ import LocationInput from "../../components/Forms/LocationInput";
 import Title from "../../components/Text/Title";
 import Card from "../../components/Layout/Card";
 
-import axios, { Axios } from "axios";
+import axios from "axios";
 
 import styles from "./HomePage.module.css";
 import StudioItem from "../../components/Studio/StudioItem";
