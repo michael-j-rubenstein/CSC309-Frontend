@@ -9,8 +9,7 @@ const ClassItem = (props) => {
   const { data } = props;
 
   console.log(data);
-  var bearer =
-    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcwMjk1OTYxLCJpYXQiOjE2NzAyOTIzNjEsImp0aSI6IjJjYzllOGFiMjVhNzQxZmJhMjY4MDYwZDk5NjBjZmRjIiwidXNlcl9pZCI6Nn0.71-wssNRtpuTU6hd-tiI-JuoCE77970xVbHXQKa4ZNE";
+  var bearer = localStorage.getItem("SavedToken");
 
   const config = {
     headers: {
