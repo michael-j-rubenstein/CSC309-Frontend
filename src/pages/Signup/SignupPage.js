@@ -1,20 +1,20 @@
 import { Link } from "react-router-dom";
 import styles from "./SignupPage.module.css";
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import axios from "axios";
-// TO DO: Adding avatar image to sign up page 
+// TO DO: Adding avatar image to sign up page
 
 const SignupPage = () => {
-  const [username, setUserName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [password2, setPassword2] = useState('');
-  const [phone_number, setPhoneNumber] = useState('');
-  const [first_name, setFirstName] = useState('');
-  const [last_name, setLastName] = useState('');
+  const [username, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
+  const [phone_number, setPhoneNumber] = useState("");
+  const [first_name, setFirstName] = useState("");
+  const [last_name, setLastName] = useState("");
   const SignupPage = async (e) => {
     e.preventDefault();
-     axios
+    axios
       .post(
         `${process.env.REACT_APP_BACKEND_URL}accounts/signup/`,
         {
@@ -30,7 +30,7 @@ const SignupPage = () => {
         {}
       )
       .then((res) => console.log(res.data));
-}
+  };
   return (
     <form className={styles.form} onSubmit={SignupPage}>
       <div className={styles["form-content"]}>
@@ -46,7 +46,8 @@ const SignupPage = () => {
               autoFocus
               className={styles["form-input"]}
               id="fname"
-              value={first_name} onChange={(e) => setFirstName(e.target.value)}
+              value={first_name}
+              onChange={(e) => setFirstName(e.target.value)}
             ></input>
           </div>
 
@@ -58,7 +59,8 @@ const SignupPage = () => {
               type="text"
               className={styles["form-input"]}
               id="lastname"
-              value={last_name} onChange={(e) => setLastName(e.target.value)}
+              value={last_name}
+              onChange={(e) => setLastName(e.target.value)}
             ></input>
           </div>
         </div>
@@ -66,14 +68,23 @@ const SignupPage = () => {
         <label className={styles["form-label"]} htmlFor="username">
           Username
         </label>
-        <input type="username" className={styles["form-input"]} id="username"
-        value={username} onChange={(e) => setUserName(e.target.value)}></input>
+        <input
+          type="username"
+          className={styles["form-input"]}
+          id="username"
+          value={username}
+          onChange={(e) => setUserName(e.target.value)}
+        ></input>
 
         <label className={styles["form-label"]} htmlFor="email">
           Email Address
         </label>
-        <input type="email" className={styles["form-input"]} id="email"
-        value={email} onChange={(e) => setEmail(e.target.value)}
+        <input
+          type="email"
+          className={styles["form-input"]}
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         ></input>
 
         <label className={styles["form-label"]} htmlFor="phone">
@@ -84,7 +95,8 @@ const SignupPage = () => {
           className={styles["form-input"]}
           id="phone"
           pattern="[0-9]{10}"
-          value={phone_number} onChange={(e) => setPhoneNumber(e.target.value)}
+          value={phone_number}
+          onChange={(e) => setPhoneNumber(e.target.value)}
         ></input>
 
         <label className={styles["form-label"]} htmlFor="password1">
@@ -94,7 +106,8 @@ const SignupPage = () => {
           type="password"
           className={styles["form-input"]}
           id="password1"
-          value={password} onChange={(e) => setPassword(e.target.value)}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         ></input>
 
         <label className={styles["form-label"]} htmlFor="password2">
@@ -104,7 +117,8 @@ const SignupPage = () => {
           type="password"
           className={styles["form-input"]}
           id="password2"
-          value={password2} onChange={(e) => setPassword2(e.target.value)}
+          value={password2}
+          onChange={(e) => setPassword2(e.target.value)}
         ></input>
 
         <label className={styles["file-label"]} htmlFor="avatar">
@@ -122,7 +136,7 @@ const SignupPage = () => {
         </Link>
         <button className={styles["form-btn"]}>Sign up</button>
         <p className={styles["copyright-tag"]}>
-          Copyright MKA Group &copy; 2022
+          Copyright Toronto Fitness Club &copy; 2022
         </p>
       </div>
     </form>

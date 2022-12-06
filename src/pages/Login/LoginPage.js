@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import styles from "./LoginPage.module.css";
 import axios from "axios";
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const LoginPage = () => {
-  const [username, setUserName] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUserName] = useState("");
+  const [password, setPassword] = useState("");
   const LoginPage = (event) => {
     event.preventDefault();
     axios
@@ -21,10 +21,9 @@ const LoginPage = () => {
       .then((res) => {
         console.log(res.data);
         let token = res.data.access;
-        localStorage.setItem("SavedToken", 'Bearer ' + token);
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+        localStorage.setItem("SavedToken", "Bearer " + token);
+        axios.defaults.headers.common["Authorization"] = "Bearer " + token;
       });
-
   };
   return (
     <form className={styles.form} onSubmit={LoginPage}>
@@ -35,20 +34,22 @@ const LoginPage = () => {
           placeholder="Username"
           autoFocus
           className={styles["form-input"]}
-          value={username} onChange={(e) => setUserName(e.target.value)}
+          value={username}
+          onChange={(e) => setUserName(e.target.value)}
         ></input>
         <input
           type="password"
           placeholder="Password"
           className={styles["form-input"]}
-          value={password} onChange={(e) => setPassword(e.target.value)}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         ></input>
         <Link to="/signup/" className={styles["form-redirect"]}>
           Don't have an account?
         </Link>
         <button className={styles["form-btn"]}>Sign in</button>
         <p className={styles["copyright-tag"]}>
-          Copyright MKA Group &copy; 2022
+          Copyright Toronto Fitness Club &copy; 2022
         </p>
       </div>
     </form>
