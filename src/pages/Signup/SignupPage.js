@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import styles from "./SignupPage.module.css";
 import React, { useState } from 'react'
 import axios from "axios";
-// TO DO: Adding avatar image to sign up page 
 
 const SignupPage = () => {
   const [username, setUserName] = useState('');
@@ -25,7 +24,6 @@ const SignupPage = () => {
     formData.append("phone_number", phone_number);
     formData.append("first_name", first_name);
     formData.append("last_name", last_name);
-    //console.log(formData);
      axios({
           method:"post",
           url:  `${process.env.REACT_APP_BACKEND_URL}accounts/signup/`,
