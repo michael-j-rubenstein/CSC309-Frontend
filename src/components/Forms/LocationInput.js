@@ -71,6 +71,7 @@ const LocationInput = (props) => {
           placeholder="Latitude"
           min="-90"
           max="90"
+          step="0.00001"
           ref={props.latRef}
         />
         <input
@@ -79,6 +80,7 @@ const LocationInput = (props) => {
           placeholder="Longitude"
           min="-180"
           max="180"
+          step="0.00001"
           ref={props.longRef}
         />
         <Button className={styles["btn-bigger"]} btnColor="primary">

@@ -9,6 +9,7 @@ import axios from "axios";
 
 import styles from "./HomePage.module.css";
 import StudioItem from "../../components/Studio/StudioItem";
+import CustomMap from "../../components/Map/CustomMap";
 
 const HomePage = () => {
   const latInputRef = useRef();
@@ -26,7 +27,7 @@ const HomePage = () => {
     event.preventDefault();
 
     var bearer =
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcwMjcxNzUzLCJpYXQiOjE2NzAyNjgxNTMsImp0aSI6IjcyNDUxOTMwM2RmODQ1NmE5ODNkODI0NjRlY2I2YWEwIiwidXNlcl9pZCI6Nn0.GwxJn8D-tyJyyBCfFXRiRjerMj5vS5m5j2syvm904GI";
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcwMzE3MzU1LCJpYXQiOjE2NzAzMTM3NTUsImp0aSI6ImI0YWUwZTQ2MDg2YTRjODRiOTAzZjEwNWJhYmI4ZjhjIiwidXNlcl9pZCI6Nn0.6olgUuQgjsK-yHF3UKUEmkQFNPdi5XZwaLa761Oq1-A";
 
     const config = {
       headers: {
@@ -34,23 +35,20 @@ const HomePage = () => {
       },
     };
 
-    const user_latitude = latInputRef.current.value * 1;
-    const user_longitude = longInputRef.current.value * 1;
+    const user_latitude =
+      latInputRef.current.value !== ""
+        ? latInputRef.current.value * 1
+        : 43.6532;
+    const user_longitude =
+      longInputRef.current.value !== ""
+        ? longInputRef.current.value * 1
+        : -79.3832;
     const amenityArray =
       filterData.amenities.length === 0 ? [] : filterData.amenities.split(",");
     const classArray =
       filterData.classes.length === 0 ? [] : filterData.classes.split(",");
     const coachArray =
       filterData.coaches.length === 0 ? [] : filterData.coaches.split(",");
-
-    console.log({
-      latitude: user_latitude,
-      longitude: user_longitude,
-      name: filterData.name,
-      amenities: amenityArray,
-      classes: classArray,
-      coaches: coachArray,
-    });
 
     axios
       .post(
@@ -67,14 +65,22 @@ const HomePage = () => {
         config
       )
       .then((res) => {
-        console.log(res.data);
         setStudios(res.data);
+        console.log(res.data);
       });
-
     setSearched(true);
   };
 
   var studio_list = Object.keys(studios);
+
+  const studio_latlng = studio_list.map((studio_name) => {
+    const latlng = {
+      lat: studios[`${studio_name}`].latitude,
+      lng: studios[`${studio_name}`].longitude,
+    };
+    return latlng;
+  });
+
   studio_list = studio_list.map((studio_name) => {
     const data = studios[`${studio_name}`];
     return <StudioItem key={data.id} data={{ ...data }}></StudioItem>;
@@ -88,6 +94,19 @@ const HomePage = () => {
     </p>
   );
 
+  var user_location = { lat: 43.6532, lng: -79.3832 };
+
+  if (
+    latInputRef.current !== undefined &&
+    longInputRef.current !== undefined &&
+    latInputRef.current.value !== "" &&
+    longInputRef.current.value !== ""
+  )
+    user_location = {
+      lat: latInputRef.current.value * 1,
+      lng: longInputRef.current.value * 1,
+    };
+
   return (
     <>
       <Hero></Hero>
@@ -100,7 +119,12 @@ const HomePage = () => {
           filterData={filterData}
           setFilterData={setFilterData}
         ></LocationInput>
-        {/* <Title>Studios</Title> */}
+        <Card className={styles.map}>
+          <CustomMap
+            userLocation={user_location}
+            locations={studio_latlng ? studio_latlng : []}
+          ></CustomMap>
+        </Card>
         <Card>{studio_list.length === 0 ? error_message : studio_list}</Card>
       </Wrapper>
     </>
