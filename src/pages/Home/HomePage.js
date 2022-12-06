@@ -10,6 +10,7 @@ import axios, { Axios } from "axios";
 import styles from "./HomePage.module.css";
 import StudioItem from "../../components/Studio/StudioItem";
 
+
 const HomePage = () => {
   const latInputRef = useRef();
   const longInputRef = useRef();
@@ -20,12 +21,13 @@ const HomePage = () => {
     event.preventDefault();
 
     var bearer =
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcwMTI3OTgxLCJpYXQiOjE2NzAxMjQzODEsImp0aSI6IjAzNGJmODc3NzdmYzRiODQ4NDExMTNhMzc3ZWI1ZDU0IiwidXNlcl9pZCI6Nn0.uyjPV3bJ3g5jB2LY7Ele6qw0e3-fkI5ZcuGNabsjTnQ";
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcwMjI0OTI4LCJpYXQiOjE2NzAyMjEzMjgsImp0aSI6IjAwMzQzZWYwOGRkNDRiNDg5MmY2ZTAyNmVlMWY4MmUyIiwidXNlcl9pZCI6M30.Hvm0CQPAbPb7nbDHtF9tjayue1q5pOtMMfn34coPdR8";
     console.log(latInputRef.current.value);
 
     const config = {
       headers: {
-        Authorization: `${bearer}`,
+        // Authorization: `${bearer}`,
+        Authorization:localStorage.getItem('SavedToken'),
       },
     };
 
