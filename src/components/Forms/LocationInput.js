@@ -12,21 +12,42 @@ const LocationInput = (props) => {
         className={styles["input-long"]}
         type="text"
         placeholder="Studio name (e.g. Athletic Center, 9Round)"
+        onChange={(event) =>
+          props.setFilterData({ ...props.filterData, name: event.target.value })
+        }
       />
       <input
         className={styles["input-long"]}
         type="text"
         placeholder="Amenities (e.g. Personal Training, Pool)"
+        onChange={(event) => {
+          props.setFilterData({
+            ...props.filterData,
+            amenities: event.target.value,
+          });
+        }}
       />
       <input
         className={styles["input-long"]}
         type="text"
         placeholder="Classes (e.g. Yoga, Karate)"
+        onChange={(event) => {
+          props.setFilterData({
+            ...props.filterData,
+            classes: event.target.value,
+          });
+        }}
       />
       <input
         className={styles["input-long"]}
         type="text"
         placeholder="Coaches (e.g. Kevin Hart, Kex Zhang)"
+        onChange={(event) => {
+          props.setFilterData({
+            ...props.filterData,
+            coaches: event.target.value,
+          });
+        }}
       />
       <div className={styles["options-wrapper"]}>
         <Button
@@ -50,6 +71,7 @@ const LocationInput = (props) => {
           placeholder="Latitude"
           min="-90"
           max="90"
+          step="0.00001"
           ref={props.latRef}
         />
         <input
@@ -58,6 +80,7 @@ const LocationInput = (props) => {
           placeholder="Longitude"
           min="-180"
           max="180"
+          step="0.00001"
           ref={props.longRef}
         />
         <Button className={styles["btn-bigger"]} btnColor="primary">

@@ -15,3 +15,7 @@
 .header-title:nth-child(2) {
     text-align: center;
 }
+
+.alert {
+    text-align: center;
+}

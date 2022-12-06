@@ -1,7 +1,7 @@
 
 .item {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 10%;
     justify-items: center;
     align-items: center;
     border-bottom: 2px solid #ccc;
@@ -41,4 +41,14 @@
 .date {
     font-weight: bold;
     font-size: 1.2rem;
+}
+
+.btns {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.3rem;
+}
+
+.btn {
+    font-size: 1.1rem;
 }
