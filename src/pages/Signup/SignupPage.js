@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "./SignupPage.module.css";
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import axios from "axios";
 
 const SignupPage = () => {
@@ -34,10 +34,12 @@ const SignupPage = () => {
         {}
       )
       .then((res) => console.log(res.data));
+      
 }
 const handleFileSelect = (event) => {
   setSelectedImage(event.target.files[0])
 }
+
   return (
     <form className={styles.form} onSubmit={SignupPage}>
       <div className={styles["form-content"]}>
@@ -53,7 +55,8 @@ const handleFileSelect = (event) => {
               autoFocus
               className={styles["form-input"]}
               id="fname"
-              value={first_name} onChange={(e) => setFirstName(e.target.value)}
+              value={first_name}
+              onChange={(e) => setFirstName(e.target.value)}
             ></input>
           </div>
 
@@ -65,7 +68,8 @@ const handleFileSelect = (event) => {
               type="text"
               className={styles["form-input"]}
               id="lastname"
-              value={last_name} onChange={(e) => setLastName(e.target.value)}
+              value={last_name}
+              onChange={(e) => setLastName(e.target.value)}
             ></input>
           </div>
         </div>
@@ -73,14 +77,23 @@ const handleFileSelect = (event) => {
         <label className={styles["form-label"]} htmlFor="username">
           Username
         </label>
-        <input type="username" className={styles["form-input"]} id="username"
-        value={username} onChange={(e) => setUserName(e.target.value)}></input>
+        <input
+          type="username"
+          className={styles["form-input"]}
+          id="username"
+          value={username}
+          onChange={(e) => setUserName(e.target.value)}
+        ></input>
 
         <label className={styles["form-label"]} htmlFor="email">
           Email Address
         </label>
-        <input type="email" className={styles["form-input"]} id="email"
-        value={email} onChange={(e) => setEmail(e.target.value)}
+        <input
+          type="email"
+          className={styles["form-input"]}
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         ></input>
 
         <label className={styles["form-label"]} htmlFor="phone">
@@ -91,7 +104,8 @@ const handleFileSelect = (event) => {
           className={styles["form-input"]}
           id="phone"
           pattern="[0-9]{10}"
-          value={phone_number} onChange={(e) => setPhoneNumber(e.target.value)}
+          value={phone_number}
+          onChange={(e) => setPhoneNumber(e.target.value)}
         ></input>
 
         <label className={styles["form-label"]} htmlFor="password1">
@@ -101,7 +115,8 @@ const handleFileSelect = (event) => {
           type="password"
           className={styles["form-input"]}
           id="password1"
-          value={password} onChange={(e) => setPassword(e.target.value)}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         ></input>
 
         <label className={styles["form-label"]} htmlFor="password2">
@@ -111,7 +126,8 @@ const handleFileSelect = (event) => {
           type="password"
           className={styles["form-input"]}
           id="password2"
-          value={password2} onChange={(e) => setPassword2(e.target.value)}
+          value={password2}
+          onChange={(e) => setPassword2(e.target.value)}
         ></input>
 
         <label className={styles["form-label"]} htmlFor="avatar">
@@ -133,7 +149,7 @@ const handleFileSelect = (event) => {
         </Link>
         <button className={styles["form-btn"]}>Sign up</button>
         <p className={styles["copyright-tag"]}>
-          Copyright MKA Group &copy; 2022
+          Copyright Toronto Fitness Club &copy; 2022
         </p>
       </div>
     </form>

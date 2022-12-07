@@ -11,7 +11,6 @@ import styles from "./HomePage.module.css";
 import StudioItem from "../../components/Studio/StudioItem";
 import CustomMap from "../../components/Map/CustomMap";
 
-
 const HomePage = () => {
   const latInputRef = useRef();
   const longInputRef = useRef();
@@ -27,6 +26,7 @@ const HomePage = () => {
   const locationSubmitHandler = async (event) => {
     event.preventDefault();
 
+<<<<<<< HEAD
     var bearer =
     localStorage.getItem('SavedToken');
     console.log(latInputRef.current.value);
@@ -36,6 +36,11 @@ const HomePage = () => {
       headers: {
         Authorization: `${bearer}`,
         //Authorization:localStorage.getItem('SavedToken'),
+=======
+    const config = {
+      headers: {
+        Authorization: localStorage.getItem("SavedToken"),
+>>>>>>> 0e0cc1bf802bd98b659ac00ac6663b5025dd44f7
       },
     };
 

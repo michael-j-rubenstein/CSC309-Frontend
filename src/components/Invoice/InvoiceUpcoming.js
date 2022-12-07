@@ -9,8 +9,7 @@ const InvoiceUpcoming = (props) => {
   const [invoiceUpcoming, setInvoiceUpcoming] = useState({});
 
   useEffect(() => {
-    var bearer =
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcwMjkwMjI1LCJpYXQiOjE2NzAyODY2MjUsImp0aSI6IjZhNmMwOTI2YjlmZTQzYjg5MTNkNDM4OWU2YjJlMmU1IiwidXNlcl9pZCI6Nn0.vqgQ9sCxIccumDoekRLBFFIEx0MBfQR4DxiIRFafNAk";
+    var bearer = localStorage.getItem("SavedToken");
 
     const config = {
       headers: {
