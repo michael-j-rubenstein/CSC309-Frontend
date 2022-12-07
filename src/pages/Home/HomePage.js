@@ -26,9 +26,21 @@ const HomePage = () => {
   const locationSubmitHandler = async (event) => {
     event.preventDefault();
 
+<<<<<<< HEAD
+    var bearer =
+    localStorage.getItem('SavedToken');
+    console.log(latInputRef.current.value);
+
+
+    const config = {
+      headers: {
+        Authorization: `${bearer}`,
+        //Authorization:localStorage.getItem('SavedToken'),
+=======
     const config = {
       headers: {
         Authorization: localStorage.getItem("SavedToken"),
+>>>>>>> 0e0cc1bf802bd98b659ac00ac6663b5025dd44f7
       },
     };
 
