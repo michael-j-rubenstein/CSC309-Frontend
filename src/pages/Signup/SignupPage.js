@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./SignupPage.module.css";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import axios from "axios";
 
 const SignupPage = () => {
@@ -12,6 +12,9 @@ const SignupPage = () => {
   const [first_name, setFirstName] = useState('');
   const [last_name, setLastName] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
+  const [errMsg, setErrMsg] = useState('');
+  const errRef = useRef();
+  const navigate = useNavigate();
 
   const SignupPage = async (e) => {
     e.preventDefault();
@@ -24,7 +27,7 @@ const SignupPage = () => {
     formData.append("phone_number", phone_number);
     formData.append("first_name", first_name);
     formData.append("last_name", last_name);
-     axios({
+      axios({
           method:"post",
           url:  `${process.env.REACT_APP_BACKEND_URL}accounts/signup/`,
           data: formData,
@@ -33,18 +36,28 @@ const SignupPage = () => {
         },
         {}
       )
-      .then((res) => console.log(res.data));
-      
+      .then((res) => {
+        console.log(res.data);
+        navigate("/login");
+      })
+      .catch(function (err) {
+        if (!err?.response) {
+          setErrMsg('No Server Response');
+        }
+        else if (err.response?.status === 400) {
+          setErrMsg('Please fill out all the fields');
+        }  
+        errRef.current.focus();
+      });      
 }
 const handleFileSelect = (event) => {
   setSelectedImage(event.target.files[0])
 }
-
   return (
     <form className={styles.form} onSubmit={SignupPage}>
+      <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
       <div className={styles["form-content"]}>
         <h1 className={styles["form-title"]}>Please sign up</h1>
-
         <div className={styles["form-input-group"]}>
           <div className={styles["input-group"]}>
             <label className={styles["form-label"]} htmlFor="fname">
@@ -147,7 +160,8 @@ const handleFileSelect = (event) => {
         <Link to="/login/" className={styles["form-redirect"]}>
           Already have an account?
         </Link>
-        <button className={styles["form-btn"]}>Sign up</button>
+        <button 
+        className={styles["form-btn"]}>Sign up</button>
         <p className={styles["copyright-tag"]}>
           Copyright Toronto Fitness Club &copy; 2022
         </p>
