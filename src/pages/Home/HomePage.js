@@ -28,14 +28,14 @@ const HomePage = () => {
     event.preventDefault();
 
     var bearer =
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcwMjI0OTI4LCJpYXQiOjE2NzAyMjEzMjgsImp0aSI6IjAwMzQzZWYwOGRkNDRiNDg5MmY2ZTAyNmVlMWY4MmUyIiwidXNlcl9pZCI6M30.Hvm0CQPAbPb7nbDHtF9tjayue1q5pOtMMfn34coPdR8";
+    localStorage.getItem('SavedToken');
     console.log(latInputRef.current.value);
 
 
     const config = {
       headers: {
-        // Authorization: `${bearer}`,
-        Authorization:localStorage.getItem('SavedToken'),
+        Authorization: `${bearer}`,
+        //Authorization:localStorage.getItem('SavedToken'),
       },
     };
 
