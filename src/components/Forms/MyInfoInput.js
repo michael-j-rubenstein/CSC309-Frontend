@@ -16,6 +16,8 @@ const MyInfoInput = (props) => {
       email: form.current[2].value,
       phone: form.current[3].value,
     };
+
+    console.log(data);
   };
 
   return (
@@ -25,9 +27,10 @@ const MyInfoInput = (props) => {
       </label>
       <input
         id="fname"
-        className={styles.input}
+        className={`${styles.input} ${props.disabled ? styles.disabled : ""}`}
         type="text"
         placeholder={props.data.fname}
+        disabled={props.disabled}
       />
 
       <label className={styles.label} htmlFor="lname">
@@ -35,9 +38,10 @@ const MyInfoInput = (props) => {
       </label>
       <input
         id="lname"
-        className={styles.input}
+        className={`${styles.input} ${props.disabled ? styles.disabled : ""}`}
         type="text"
         placeholder={props.data.lname}
+        disabled={props.disabled}
       />
 
       <label className={styles.label} htmlFor="email">
@@ -45,9 +49,10 @@ const MyInfoInput = (props) => {
       </label>
       <input
         id="email"
-        className={styles.input}
+        className={`${styles.input} ${props.disabled ? styles.disabled : ""}`}
         type="email"
         placeholder={props.data.email}
+        disabled={props.disabled}
       />
 
       <label className={styles.label} htmlFor="phone">
@@ -55,10 +60,11 @@ const MyInfoInput = (props) => {
       </label>
       <input
         id="phone"
-        className={styles.input}
+        className={`${styles.input} ${props.disabled ? styles.disabled : ""}`}
         type="number"
         placeholder={props.data.phone}
         min="0"
+        disabled={props.disabled}
       />
 
       <label className={styles.label} htmlFor="phone">
@@ -72,12 +78,15 @@ const MyInfoInput = (props) => {
         ></img>
         <input
           id="phone"
-          className={`${styles.input} ${styles["file-input"]}`}
+          className={`${styles.input} ${styles["file-input"]} ${
+            props.disabled ? styles["file-input-disabled"] : ""
+          }`}
           type="file"
           onChange={(event) => {
             console.log(event.target.files[0]);
             setSelectedImage(event.target.files[0]);
           }}
+          disabled={props.disabled}
         />
       </div>
 
@@ -103,11 +112,15 @@ const MyInfoInput = (props) => {
         autoComplete="on"
       /> */}
 
-      <div className={styles["btn-wrapper"]}>
-        <Button btnColor="plain" className={styles["submit-btn"]}>
-          Update Information
-        </Button>
-      </div>
+      {props.disabled ? (
+        ""
+      ) : (
+        <div className={styles["btn-wrapper"]}>
+          <Button btnColor="plain" className={styles["submit-btn"]}>
+            Update Information
+          </Button>
+        </div>
+      )}
     </form>
   );
 };

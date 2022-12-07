@@ -38,7 +38,8 @@ const InvoiceUpcoming = (props) => {
   );
 
   const invoice =
-    Object.keys(invoiceUpcoming).length === 0 ? (
+    Object.keys(invoiceUpcoming).length === 0 ||
+    Object.keys(invoiceUpcoming).includes("error") ? (
       msg
     ) : (
       <InvoiceItem data={invoiceUpcoming}></InvoiceItem>

@@ -8,15 +8,6 @@ import axios from "axios";
 const ClassItem = (props) => {
   const { data } = props;
 
-  console.log(data);
-  var bearer = localStorage.getItem("SavedToken");
-
-  const config = {
-    headers: {
-      Authorization: `${bearer}`,
-    },
-  };
-
   return (
     <div className={styles.item}>
       <h3 className={styles["title"]}>{data.name}</h3>

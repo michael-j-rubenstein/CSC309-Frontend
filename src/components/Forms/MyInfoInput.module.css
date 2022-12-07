@@ -20,8 +20,16 @@
     font-family: inherit;
 }
 
+.disabled::placeholder {
+    color: #222222
+}
+
 .file-input {
     border: 0;
+}
+
+.file-input-disabled {
+    display: none;
 }
 
 .img {

@@ -1,0 +1,35 @@
+.wrapper {
+    padding-bottom: 3rem;
+}
+
+.title {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.error {
+    text-align: center;
+    margin-bottom: 0;
+    margin-top: 1.5rem;
+}
+
+.content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.text {
+    font-size: 1.3rem;
+    margin-bottom: 0;
+}
+
+.highlight {
+    font-weight: bold;
+}
+
+.btn {
+    font-size: 1.3rem;
+    align-self: flex-end;
+    padding-bottom: 0;
+}
