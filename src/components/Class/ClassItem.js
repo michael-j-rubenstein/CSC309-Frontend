@@ -1,8 +1,6 @@
 import Button from "../UI/Button";
 import styles from "./ClassItem.module.css";
 
-import axios from "axios";
-
 // name, start_time, end_time, date
 
 const ClassItem = (props) => {
@@ -20,14 +18,14 @@ const ClassItem = (props) => {
         <Button
           className={styles.btn}
           btnColor="plain"
-          onClick={props.skipHandler(data)}
+          onClick={(event) => props.skipHandler(data)}
         >
           Skip Class
         </Button>
         <Button
           className={styles.btn}
           btnColor="plain"
-          onClick={props.quitHandler(data)}
+          onClick={(event) => props.quitHandler(data)}
         >
           Quit Class
         </Button>

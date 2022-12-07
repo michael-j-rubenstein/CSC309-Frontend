@@ -15,9 +15,22 @@ const MyInfoInput = (props) => {
       lname: form.current[1].value,
       email: form.current[2].value,
       phone: form.current[3].value,
+      avatar: form.current[4].files[0],
     };
 
     console.log(data);
+
+    // axios
+    //   .put(
+    //     `${process.env.REACT_APP_BACKEND_URL}classes/deleteclass/`,
+    //     req,
+    //     config
+    //   )
+    //   .then((res) => {
+    //     // console.log(res.data);
+    //     setToggler(!toggler);
+    //     // console.log(toggler);
+    //   });
   };
 
   return (
@@ -73,8 +86,16 @@ const MyInfoInput = (props) => {
       <div>
         <img
           alt=""
-          className={`${selectedImage ? styles.img : styles["hide-img"]}`}
-          src={selectedImage ? URL.createObjectURL(selectedImage) : ""}
+          className={`${
+            selectedImage || props.data.avatar !== ""
+              ? styles.img
+              : styles["hide-img"]
+          }`}
+          srcSet={
+            selectedImage
+              ? URL.createObjectURL(selectedImage)
+              : props.data.avatar
+          }
         ></img>
         <input
           id="phone"

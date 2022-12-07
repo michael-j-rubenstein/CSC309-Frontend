@@ -10,16 +10,14 @@ const ClassList = (props) => {
   const [classes, setClasses] = useState([]);
   const [toggler, setToggler] = useState(true);
 
-  var bearer = localStorage.getItem("SavedToken");
-
   const config = {
     headers: {
-      Authorization: `${bearer}`,
+      Authorization: localStorage.getItem("SavedToken"),
     },
   };
 
   useEffect(() => {
-    if (bearer) {
+    if (config.headers.Authorization) {
       // get classes data
       axios
         .get(`${process.env.REACT_APP_BACKEND_URL}classes/schedule/`, config)
@@ -28,7 +26,7 @@ const ClassList = (props) => {
           setClasses(res.data);
         });
     }
-  }, []);
+  }, [toggler, config]);
 
   // skip one class
   const skipHandler = (data) => {
@@ -38,8 +36,6 @@ const ClassList = (props) => {
       date: { year: date[0] * 1, month: date[1] * 1, day: date[2] * 1 },
     };
 
-    console.log("req", req);
-
     axios
       .post(
         `${process.env.REACT_APP_BACKEND_URL}classes/deleteclass/`,
@@ -47,12 +43,15 @@ const ClassList = (props) => {
         config
       )
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
+        setToggler(!toggler);
+        // console.log(toggler);
       });
   };
 
   // quit entire class
   const quitHandler = (data) => {
+    // console.log("removing classes");
     const req = {
       classname: data.name,
     };
@@ -64,11 +63,13 @@ const ClassList = (props) => {
         config
       )
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
+        setToggler(!toggler);
+        // console.log(toggler);
       });
   };
 
-  const msg = bearer ? (
+  const msg = config.headers.Authorization ? (
     <h2 className={styles.alert}>You are not enrolled in any classes!</h2>
   ) : (
     <h2 className={styles.alert}>Please sign in to see your classes!</h2>

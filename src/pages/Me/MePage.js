@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ClassList from "../../components/Class/ClassList";
 import MeInputSelector from "../../components/Forms/MeInputSelector";
 import MyInfoInput from "../../components/Forms/MyInfoInput";
@@ -8,15 +8,38 @@ import Wrapper from "../../components/Layout/Wrapper";
 import MySubscriptionDisplay from "../../components/Profile/MySubscriptionDisplay";
 import Title from "../../components/Text/Title";
 
+import axios from "axios";
+
 const MePage = () => {
-  const [userInfo, setUserInfo] = useState({
-    fname: "temp",
-    lname: "user",
-    email: "temp@temp.com",
-    phone: 4151231234,
-    avatar:
-      "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=1800&t=st=1670197314~exp=1670197914~hmac=8f397978a687d893ef4c9ed7498ec9d3498bd6d7850a1654e3cf879688d41b0c",
-  });
+  const [userInfo, setUserInfo] = useState({});
+
+  var bearer = localStorage.getItem("SavedToken");
+
+  useEffect(() => {
+    const config = {
+      headers: {
+        Authorization: `${bearer}`,
+      },
+    };
+
+    if (bearer) {
+      // get classes data
+
+      axios
+        .get(`${process.env.REACT_APP_BACKEND_URL}accounts/me/`, config)
+        .then((res) => {
+          console.log(res.data);
+          const data = res.data;
+          setUserInfo({
+            fname: data.first_name ? data.first_name : "",
+            lname: data.last_name ? data.last_name : "",
+            email: data.email ? data.email : "",
+            phone: data.phone_number ? data.phone_number * 1 : "",
+            avatar: data.avatar ? data.avatar : "",
+          });
+        });
+    }
+  }, [bearer]);
 
   const [form, setForm] = useState("profile");
 
