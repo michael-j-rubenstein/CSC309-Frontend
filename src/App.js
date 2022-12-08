@@ -7,6 +7,7 @@ import HomePage from "./pages/Home/HomePage";
 import LoginPage from "./pages/Login/LoginPage";
 import MePage from "./pages/Me/MePage";
 import SignupPage from "./pages/Signup/SignupPage";
+import StudioPage from "./pages/Studio/StudioPage";
 import SubscriptionPage from "./pages/Subscription/SubscriptionPage";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         </Route>
         <Route path="/login/" element={<LoginPage />} />
         <Route path="/signup/" element={<SignupPage />} />
+        <Route path="/studio/:id/" element={<StudioPage/>} />
       </Routes>
     </BrowserRouter>
   );

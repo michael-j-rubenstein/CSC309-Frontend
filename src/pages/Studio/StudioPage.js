@@ -8,6 +8,7 @@ import Wrapper from "../../components/Layout/Wrapper";
 import Title from "../../components/Text/Title";
 import axios from "axios";
 import ImageSlider from "../../components/Images/ImageSlider";
+import ClassesList from "../../components/Classes/ClassesList";
 import './StudioPage.module.css';
 
 const StudioPage = () => {
@@ -18,9 +19,14 @@ const StudioPage = () => {
     const [amenities, setAmenities] = useState();
     const [images, setImages] = useState();
     const [classes, setClasses] = useState();
+    const [search_name, setSearchname] = useState();
+    const [search_coach, setCoach] = useState();
+    const [search_start, setStart] = useState();
+    const [search_end, setEnd] = useState();
+    const [search_date, setDate] = useState();
+    const classes_copy = null;
 
-    var token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcwMzg2NDIyLCJpYXQiOjE2NzAzODI4MjIsImp0aSI6IjJmNGQ4ZDRmN2JlMjQyOGViOTA0M2FiNWFkYjAwMDg0IiwidXNlcl9pZCI6MX0.SSf1vqJlNLw9x28olAIoiGUpTnn1WDlgE9KJ8lcQz00"
-    
+    var token = localStorage.getItem("SavedToken")
     useEffect(() =>{
         axios.get(`${process.env.REACT_APP_BACKEND_URL}studios/${id}/`, { headers:
             {
@@ -29,33 +35,97 @@ const StudioPage = () => {
             })
         .then(response =>{
             const data = response.data
-            console.log(data)
             setName(data["name"]);
             setAddress(data["address"]);
             setPhone(data["phone_num"]);
             setAmenities(data["amenities"]);
             setImages(data["images"]);
-            setClasses(data["classes"])
-    
+            setClasses(data["classes"]);
+            classes_copy = [...classes];
         })
     },[]) 
+    console.log("classes")
+    console.log(classes)
 
     const ImageData = [];
-    // console.log(images[0])
     if (images != null){
         for (const value of images){
             var image_url = `${process.env.REACT_APP_BACKEND_URL}`.concat(value.substring(1))
             ImageData.push({'image': image_url})
-            // console.log(value)
         }
-        console.log(ImageData)
     }
+
+    const searchHandler = (e) =>{
+        e.preventDefault();
+        var request_body = {}
+        if(search_date !== undefined){
+        const date_lst = search_date.split("/")
+        const date_dict =  {"year": parseInt(date_lst[0]), "month": parseInt(date_lst[1]), "day": parseInt(date_lst[2])}
+        request_body["date"] = date_dict
+        }
+        if(search_start !== undefined){
+        const start_lst = search_start.split(":")
+        const start_dict = {"hour": parseInt(start_lst[0]), "minute": parseInt(start_lst[1])}
+        request_body["start_time"] = start_dict;
+        }
+        if(search_end !== undefined){
+            const end_lst = search_end.split(":")
+            const end_dict = {"hour": parseInt(end_lst[0]), "minute": parseInt(end_lst[1])}
+            request_body["end_time"] = end_dict
+        }
+        if(search_coach !== undefined){
+            request_body["coach"] = search_coach
+        }
+        if(search_name !== undefined){
+            request_body["classname"] = search_name
+        }
+        console.log(request_body)
+        axios.post(`${process.env.REACT_APP_BACKEND_URL}classes/${id}/searchclasses/`, {headers: {Authorization: `${token}`}, 
+        body: request_body,
+        }).then(res =>{
+            console.log(res.data)
+            setClasses(res.data);
+        })
+    }
+
+    // const restoreHandler = () => {
+    //     setClasses(classes_copy)
+    // }
 
     return (
         <>
         <Wrapper>
             <Title className="section">{name}</Title>
             <ImageSlider ImageData={ImageData} />
+            <form onSubmit={searchHandler}>
+                <label>
+                    Search for class
+                </label>
+                <label htmlFor="searchName">
+                    Class Name
+                </label>
+                <input id="searchName" type="text" placeholder="yoga" onChange={(e) => setSearchname(e.target.value)}/>
+                <label htmlFor="searchDate">
+                    Date
+                </label>
+                <input id="searchDate" type="text" placeholder="2023/1/15" onChange={(e) => setDate(e.target.value)}/>
+                <label htmlFor="searchCoach">
+                    Coach
+                </label>
+                <input id="searchCoach" type="text" placeholder="kex" onChange={(e) => setCoach(e.target.value)}/>
+                <label htmlFor="searchStart">
+                    Start Time
+                </label>
+                <input id="searchStart" type="text" placeholder="14:00" onChange={(e) => setStart(e.target.value)}/>
+                <label htmlFor="searchEnd">
+                    End Time
+                </label>
+                <input id="searchEnd" type="text" placeholder="16:30" onChange={(e) => setEnd(e.target.value)}/>
+                <input type="submit" value="search"/>
+            </form>
+            {/* <button onClick={restoreHandler}>reset search</button> */}
+            <ClassesList ClassesData={classes} id={id}/>
+
         </Wrapper>
         </>
     )
