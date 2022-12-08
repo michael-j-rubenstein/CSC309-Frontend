@@ -30,8 +30,10 @@ const MyInfoInput = (props) => {
     const password1 = form.current[4].value;
     const password2 = form.current[5].value;
 
-    if (password1 !== "" && password1 === password2 && password1.length >= 8)
+    if (password1 !== "" && password1 === password2 && password1.length >= 0) {
       formData.append("password", password1);
+      formData.append("password2", password2);
+    }
 
     if (selectedImage) formData.append("avatar", selectedImage);
 
@@ -45,6 +47,7 @@ const MyInfoInput = (props) => {
         Authorization: localStorage.getItem("SavedToken"),
       },
     }).then((res) => {
+      console.log(res.data);
       alert("information updated successfully!");
     });
   };
