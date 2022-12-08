@@ -10,13 +10,13 @@ const ClassList = (props) => {
   const [classes, setClasses] = useState([]);
   const [toggler, setToggler] = useState(true);
 
-  const config = {
-    headers: {
-      Authorization: localStorage.getItem("SavedToken"),
-    },
-  };
-
   useEffect(() => {
+    const config = {
+      headers: {
+        Authorization: localStorage.getItem("SavedToken"),
+      },
+    };
+
     if (config.headers.Authorization) {
       // get classes data
       axios
@@ -26,7 +26,13 @@ const ClassList = (props) => {
           setClasses(res.data);
         });
     }
-  }, [toggler, config]);
+  }, [toggler]);
+
+  const config = {
+    headers: {
+      Authorization: localStorage.getItem("SavedToken"),
+    },
+  };
 
   // skip one class
   const skipHandler = (data) => {
@@ -94,6 +100,7 @@ const ClassList = (props) => {
         <h2 className={styles["header-title"]}>Class Name</h2>
         <h2 className={styles["header-title"]}>Time</h2>
         <h2 className={styles["header-title"]}>Date</h2>
+        <h2 className={styles["header-title"]}>Options</h2>
       </div>
       <Card>{classItems}</Card>
     </>

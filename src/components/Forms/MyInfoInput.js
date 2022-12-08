@@ -1,38 +1,52 @@
+import axios from "axios";
 import { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../UI/Button";
 import styles from "./MyInfoInput.module.css";
 
 const MyInfoInput = (props) => {
   const form = useRef();
+  const navigate = useNavigate();
 
   const [selectedImage, setSelectedImage] = useState(null);
 
   const submitHandler = (event) => {
     event.preventDefault();
 
-    const data = {
-      fname: form.current[0].value,
-      lname: form.current[1].value,
-      email: form.current[2].value,
-      phone: form.current[3].value,
-      password1: form.current[4].value,
-      password2: form.current[5].value,
-      avatar: form.current[6].files[0],
-    };
+    const formData = new FormData();
 
-    console.log(data);
+    if (form.current[0].value !== "")
+      formData.append("first_name", form.current[0].value);
 
-    // axios
-    //   .put(
-    //     `${process.env.REACT_APP_BACKEND_URL}classes/deleteclass/`,
-    //     req,
-    //     config
-    //   )
-    //   .then((res) => {
-    //     // console.log(res.data);
-    //     setToggler(!toggler);
-    //     // console.log(toggler);
-    //   });
+    if (form.current[1].value !== "")
+      formData.append("last_name", form.current[1].value);
+
+    if (form.current[2].value !== "")
+      formData.append("email", form.current[2].value);
+
+    if (form.current[3].value !== "")
+      formData.append("phone_number", form.current[3].value);
+
+    const password1 = form.current[4].value;
+    const password2 = form.current[5].value;
+
+    if (password1 !== "" && password1 === password2 && password1.length >= 8)
+      formData.append("password", password1);
+
+    if (selectedImage) formData.append("avatar", selectedImage);
+
+    axios({
+      method: "put",
+      url: `${process.env.REACT_APP_BACKEND_URL}accounts/edit/`,
+      data: formData,
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: localStorage.getItem("SavedToken"),
+      },
+    }).then((res) => {
+      alert("information updated successfully!");
+    });
   };
 
   return (
