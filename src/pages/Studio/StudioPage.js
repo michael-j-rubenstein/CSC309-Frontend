@@ -41,10 +41,10 @@ const StudioPage = () => {
             setAmenities(data["amenities"]);
             setImages(data["images"]);
             setClasses(data["classes"]);
-            classes_copy = [...classes];
+            // classes_copy = [...classes];
         })
     },[]) 
-    console.log("classes")
+    console.log("onload")
     console.log(classes)
 
     const ImageData = [];
@@ -83,6 +83,7 @@ const StudioPage = () => {
         axios.post(`${process.env.REACT_APP_BACKEND_URL}classes/${id}/searchclasses/`, {headers: {Authorization: `${token}`}, 
         body: request_body,
         }).then(res =>{
+            console.log("search")
             console.log(res.data)
             setClasses(res.data);
         })
