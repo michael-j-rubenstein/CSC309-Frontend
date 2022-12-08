@@ -1,0 +1,58 @@
+
+.item {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 10%;
+    justify-items: center;
+    align-items: center;
+    border-bottom: 2px solid #ccc;
+}
+
+.item:last-of-type {
+    border: 0;
+}
+
+.title {
+    font-size: 1.5rem;
+    padding: 0 0.5rem;
+}
+
+.time-wrapper {
+    display: flex;
+    gap: 2rem;
+    position: relative;
+}
+
+.time {
+    position: relative;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.time:first-of-type::after {
+    content: "";
+    width: 0.8rem;
+    height: 3px;
+    position: absolute;
+    right: calc(-1.4rem);
+    top: 0.63rem;
+    background: #bbb;
+}
+
+.date {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.btns {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.3rem;
+}
+
+.btn {
+    font-size: 1.1rem;
+}
+
+.descriptiopn {
+    
+}

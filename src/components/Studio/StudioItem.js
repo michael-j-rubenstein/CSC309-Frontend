@@ -5,9 +5,15 @@ import Button from "../UI/Button";
 import styles from "./StudioItem.module.css";
 
 const StudioItem = (props) => {
-  const { name, address, distance, directions } = props.data;
+  const { name, address, distance, directions, id } = props.data;
 
   const navigate = useNavigate();
+
+  const toStudio = () =>{
+      navigate(`/studio/${id}/`,{
+        id:id
+      });
+  };
 
   return (
     <div className={styles["studio-wrapper"]}>
@@ -26,11 +32,9 @@ const StudioItem = (props) => {
               Directions
             </Button>
           </a>
-          <Link>
-            <Button className={styles["studio-btn"]} btnColor="plain">
+          <Button className={styles["studio-btn"]} btnColor="plain" onClick={toStudio}>
               View
-            </Button>
-          </Link>
+          </Button>
         </div>
       </div>
     </div>
