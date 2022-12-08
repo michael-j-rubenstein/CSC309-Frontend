@@ -25,6 +25,10 @@
     margin-bottom: 2rem;
 }
 
+.section:first-of-type {
+    margin-top: 3.5rem;
+}
+
 .section::after {
     content: "";
     height: 3px;

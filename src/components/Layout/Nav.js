@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 
 import styles from "./Nav.module.css";
 
 const Nav = () => {
-  const [page, setPage] = useState(0);
+  const location = useLocation();
+  const paths = ["/", "/subscription/", "/me/"];
+  const [page, setPage] = useState(paths.indexOf(location.pathname));
 
   const token = localStorage.getItem("SavedToken");
 

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styles from "./AdminInputSelector.module.css";
 
 const AdminInputSelector = (props) => {
