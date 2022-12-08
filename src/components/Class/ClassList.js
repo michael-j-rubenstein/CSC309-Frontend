@@ -10,23 +10,29 @@ const ClassList = (props) => {
   const [classes, setClasses] = useState([]);
   const [toggler, setToggler] = useState(true);
 
-  var bearer = localStorage.getItem("SavedToken");
+  useEffect(() => {
+    const config = {
+      headers: {
+        Authorization: localStorage.getItem("SavedToken"),
+      },
+    };
+
+    if (config.headers.Authorization) {
+      // get classes data
+      axios
+        .get(`${process.env.REACT_APP_BACKEND_URL}classes/schedule/`, config)
+        .then((res) => {
+          // console.log(res.data);
+          setClasses(res.data);
+        });
+    }
+  }, [toggler]);
 
   const config = {
     headers: {
-      Authorization: `${bearer}`,
+      Authorization: localStorage.getItem("SavedToken"),
     },
   };
-
-  useEffect(() => {
-    // get classes data
-    axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}classes/schedule/`, config)
-      .then((res) => {
-        // console.log(res.data);
-        setClasses(res.data);
-      });
-  }, []);
 
   // skip one class
   const skipHandler = (data) => {
@@ -36,8 +42,6 @@ const ClassList = (props) => {
       date: { year: date[0] * 1, month: date[1] * 1, day: date[2] * 1 },
     };
 
-    console.log("req", req);
-
     axios
       .post(
         `${process.env.REACT_APP_BACKEND_URL}classes/deleteclass/`,
@@ -45,12 +49,15 @@ const ClassList = (props) => {
         config
       )
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
+        setToggler(!toggler);
+        // console.log(toggler);
       });
   };
 
   // quit entire class
   const quitHandler = (data) => {
+    // console.log("removing classes");
     const req = {
       classname: data.name,
     };
@@ -62,31 +69,38 @@ const ClassList = (props) => {
         config
       )
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
+        setToggler(!toggler);
+        // console.log(toggler);
       });
   };
 
+  const msg = config.headers.Authorization ? (
+    <h2 className={styles.alert}>You are not enrolled in any classes!</h2>
+  ) : (
+    <h2 className={styles.alert}>Please sign in to see your classes!</h2>
+  );
+
   const classItems =
-    classes.length === 0 ? (
-      <h2 className={styles.alert}>You are not enrolled in any classes!</h2>
-    ) : (
-      classes.map((class_obj) => {
-        return (
-          <ClassItem
-            key={class_obj.name + class_obj.date}
-            data={class_obj}
-            skipHandler={skipHandler}
-            quitHandler={quitHandler}
-          />
-        );
-      })
-    );
+    classes.length === 0
+      ? msg
+      : classes.map((class_obj) => {
+          return (
+            <ClassItem
+              key={class_obj.name + class_obj.date}
+              data={class_obj}
+              skipHandler={skipHandler}
+              quitHandler={quitHandler}
+            />
+          );
+        });
   return (
     <>
       <div className={styles["header"]}>
         <h2 className={styles["header-title"]}>Class Name</h2>
         <h2 className={styles["header-title"]}>Time</h2>
         <h2 className={styles["header-title"]}>Date</h2>
+        <h2 className={styles["header-title"]}>Options</h2>
       </div>
       <Card>{classItems}</Card>
     </>

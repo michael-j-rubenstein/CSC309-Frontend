@@ -1,12 +1,6 @@
 import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
 
 const CustomMap = ({ google, locations = [], userLocation }) => {
-  const defaultProps = {
-    center: { lat: 40.73, lng: -73.93 },
-    zoom: 12,
-  };
-
-  console.log(userLocation);
   return (
     <div>
       <Map
