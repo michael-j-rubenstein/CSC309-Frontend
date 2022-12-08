@@ -15,7 +15,9 @@ const MyInfoInput = (props) => {
       lname: form.current[1].value,
       email: form.current[2].value,
       phone: form.current[3].value,
-      avatar: form.current[4].files[0],
+      password1: form.current[4].value,
+      password2: form.current[5].value,
+      avatar: form.current[6].files[0],
     };
 
     console.log(data);
@@ -80,7 +82,35 @@ const MyInfoInput = (props) => {
         disabled={props.disabled}
       />
 
-      <label className={styles.label} htmlFor="phone">
+      {!props.disabled ? (
+        <>
+          <label className={styles.label} htmlFor="password">
+            Password (does not change if left blank)
+          </label>
+          <input
+            id="password"
+            className={styles.input}
+            type="password"
+            placeholder={"********"}
+            autoComplete="on"
+          />
+
+          <label className={styles.label} htmlFor="password2">
+            Confirm Password
+          </label>
+          <input
+            id="password2"
+            className={styles.input}
+            type="password"
+            placeholder={"********"}
+            autoComplete="on"
+          />
+        </>
+      ) : (
+        <></>
+      )}
+
+      <label className={styles.label} htmlFor="avatar">
         Avatar
       </label>
       <div>
@@ -98,7 +128,7 @@ const MyInfoInput = (props) => {
           }
         ></img>
         <input
-          id="phone"
+          id="avatar"
           className={`${styles.input} ${styles["file-input"]} ${
             props.disabled ? styles["file-input-disabled"] : ""
           }`}
@@ -110,28 +140,6 @@ const MyInfoInput = (props) => {
           disabled={props.disabled}
         />
       </div>
-
-      {/* <label className={styles.label} htmlFor="password">
-        Password
-      </label>
-      <input
-        id="password"
-        className={styles.input}
-        type="password"
-        placeholder={"********"}
-        autoComplete="on"
-      />
-
-      <label className={styles.label} htmlFor="password2">
-        Confirm Password
-      </label>
-      <input
-        id="password2"
-        className={styles.input}
-        type="password"
-        placeholder={"********"}
-        autoComplete="on"
-      /> */}
 
       {props.disabled ? (
         ""

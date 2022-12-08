@@ -5,7 +5,7 @@ import styles from "./Nav.module.css";
 
 const Nav = () => {
   const location = useLocation();
-  const paths = ["/", "/me/", "/subscription/"];
+  const paths = ["/", "/subscription/", "/me/"];
   const [page, setPage] = useState(paths.indexOf(location.pathname));
 
   const token = localStorage.getItem("SavedToken");
