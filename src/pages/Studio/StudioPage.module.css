@@ -1,35 +1,23 @@
-.slider {
-    position: relative;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+.title {
+    margin: 0;
+    padding: 0;
 }
 
-.image {
-    width: 1000px;
-    height: 600px;
-    border-radius: 10px;
-}
-
-.right-arrow {
+.home {
+    all: unset;
     position: absolute;
-    top: 50%;
-    right: 32px;
-    font-size: 3rem;
-    color: #000;
-    z-index: 10;
-    cursor: pointer;
-    user-select: none;
+    top: 2rem;
+    right: 4rem;
+    color: rgb(113, 113, 113);
+    font-weight: 500;
+    font-size: 1.5rem;
+    padding: 0 0.3rem;
+    padding-bottom: calc(0.3rem + 2px);
 }
 
-.left-arrow {
-    position: absolute;
-    top: 50%;
-    left: 32px;
-    font-size: 3rem;
-    color: rgb(9, 102, 196);
-    z-index: 10;
+.home:hover {
+    /* border-bottom: 2px solid rgb(113, 113, 113); */
+    color: #222222;
     cursor: pointer;
-    user-select: none;
 }

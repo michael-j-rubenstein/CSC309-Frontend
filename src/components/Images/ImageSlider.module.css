@@ -1,34 +1,62 @@
 .slider {
+    /* padding-top: 2rem; */
+    display: block;
     position: relative;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background: #1B1C1F;
+    height: 60vh;
+    /* width: 100%; */
+    margin-bottom: 3rem;
+    overflow: hidden;
 }
 
 .image {
-    width: 1000px;
-    height: 600px;
-    border-radius: 10px;
+    /* max-width: 100%; */
+    /* min-width: 100%; */
+    min-height: 60vh;
+    object-fit: cover;
+    object-position: center;
+    /* max-height: 30rem; */
+    user-select: none;
+}
+
+.slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding: 2rem; */
+}
+
+.arrows {
+    position: absolute;
+    bottom: 0;
+    left: calc(50% - 43px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    color: white;
+    font-size: 1.7rem;
+    padding-bottom: 1rem;
+}
+
+.arrows svg {
+    background: transparent;
+    border-radius: 50%;
+    overflow: hidden;
+    color: rgba(253, 253, 253, 0.886);
+    border: 2px solid #000;
 }
 
 .right-arrow {
-    position: absolute;
-    top: 50%;
-    right: 32px;
     font-size: 3rem;
-    color: #000;
     z-index: 10;
     cursor: pointer;
     user-select: none;
 }
 
 .left-arrow {
-    position: absolute;
-    top: 50%;
-    left: 32px;
     font-size: 3rem;
-    color: rgb(9, 102, 196);
+    color: #fff;
     z-index: 10;
     cursor: pointer;
     user-select: none;
