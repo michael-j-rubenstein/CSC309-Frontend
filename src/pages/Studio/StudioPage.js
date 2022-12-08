@@ -29,27 +29,27 @@ const StudioPage = () => {
   const [search_date, setDate] = useState();
   const classes_copy = null;
 
-  var token = localStorage.getItem("SavedToken");
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}studios/${id}/`, {
-        headers: {
-          Authorization: `${token}`,
-        },
-      })
-      .then((response) => {
-        const data = response.data;
-        setName(data["name"]);
-        setAddress(data["address"]);
-        setPhone(data["phone_num"]);
-        setAmenities(data["amenities"]);
-        setImages(data["images"]);
-        setClasses(data["classes"]);
-        classes_copy = [...classes];
-      });
-  }, []);
-  console.log("classes");
-  console.log(classes);
+
+    var token = localStorage.getItem("SavedToken")
+    useEffect(() =>{
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}studios/${id}/`, { headers:
+            {
+                Authorization: `${token}`
+            }
+            })
+        .then(response =>{
+            const data = response.data
+            setName(data["name"]);
+            setAddress(data["address"]);
+            setPhone(data["phone_num"]);
+            setAmenities(data["amenities"]);
+            setImages(data["images"]);
+            setClasses(data["classes"]);
+            // classes_copy = [...classes];
+        })
+    },[]) 
+    console.log("onload")
+    console.log(classes)
 
   const ImageData = [];
   if (images != null) {
@@ -61,17 +61,39 @@ const StudioPage = () => {
     }
   }
 
-  const searchHandler = (e) => {
-    e.preventDefault();
-    var request_body = {};
-    if (search_date !== undefined) {
-      const date_lst = search_date.split("/");
-      const date_dict = {
-        year: parseInt(date_lst[0]),
-        month: parseInt(date_lst[1]),
-        day: parseInt(date_lst[2]),
-      };
-      request_body["date"] = date_dict;
+    const searchHandler = (e) =>{
+        e.preventDefault();
+        var request_body = {}
+        if(search_date !== undefined){
+        const date_lst = search_date.split("/")
+        const date_dict =  {"year": parseInt(date_lst[0]), "month": parseInt(date_lst[1]), "day": parseInt(date_lst[2])}
+        request_body["date"] = date_dict
+        }
+        if(search_start !== undefined){
+        const start_lst = search_start.split(":")
+        const start_dict = {"hour": parseInt(start_lst[0]), "minute": parseInt(start_lst[1])}
+        request_body["start_time"] = start_dict;
+        }
+        if(search_end !== undefined){
+            const end_lst = search_end.split(":")
+            const end_dict = {"hour": parseInt(end_lst[0]), "minute": parseInt(end_lst[1])}
+            request_body["end_time"] = end_dict
+        }
+        if(search_coach !== undefined){
+            request_body["coach"] = search_coach
+        }
+        if(search_name !== undefined){
+            request_body["classname"] = search_name
+        }
+        console.log(request_body)
+        axios.post(`${process.env.REACT_APP_BACKEND_URL}classes/${id}/searchclasses/`, {headers: {Authorization: `${token}`}, 
+        body: request_body,
+        }).then(res =>{
+            console.log("search")
+            console.log(res.data)
+            setClasses(res.data);
+        })
+
     }
     if (search_start !== undefined) {
       const start_lst = search_start.split(":");
