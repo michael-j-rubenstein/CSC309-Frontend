@@ -18,4 +18,14 @@
 
 .alert {
     text-align: center;
+    font-size: 1.8rem;
+}
+
+.list {
+    max-height: 80vh;
+    overflow: scroll;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
 }

@@ -1,5 +1,4 @@
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { createSearchParams, useNavigate } from "react-router-dom";
 import Button from "../UI/Button";
 
 import styles from "./StudioItem.module.css";
@@ -9,10 +8,19 @@ const StudioItem = (props) => {
 
   const navigate = useNavigate();
 
-  const toStudio = () =>{
-      navigate(`/studio/${id}/`,{
-        id:id
-      });
+  console.log(props.data);
+
+  const toStudio = () => {
+    // navigate(`/studio/${id}/`, {
+    //   id: id,
+    // });
+    navigate({
+      pathname: `/studio/${id}/`,
+      search: createSearchParams({
+        user_lat: props.data.user_lat,
+        user_long: props.data.user_long,
+      }).toString(),
+    });
   };
 
   return (
@@ -32,8 +40,12 @@ const StudioItem = (props) => {
               Directions
             </Button>
           </a>
-          <Button className={styles["studio-btn"]} btnColor="plain" onClick={toStudio}>
-              View
+          <Button
+            className={styles["studio-btn"]}
+            btnColor="plain"
+            onClick={toStudio}
+          >
+            View
           </Button>
         </div>
       </div>

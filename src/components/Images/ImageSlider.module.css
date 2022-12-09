@@ -5,7 +5,7 @@
     background: #1B1C1F;
     height: 60vh;
     /* width: 100%; */
-    margin-bottom: 3rem;
+    margin-bottom: 6rem;
     overflow: hidden;
 }
 
@@ -45,6 +45,10 @@
     overflow: hidden;
     color: rgba(253, 253, 253, 0.886);
     border: 2px solid #000;
+}
+
+.arrows svg:hover {
+    cursor: pointer;
 }
 
 .right-arrow {
