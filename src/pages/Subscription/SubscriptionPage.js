@@ -1,40 +1,16 @@
+import SubscriptionList from "../../components/Subscription/SubscriptionList";
+import styles from "../../components/Subscription/SubscriptionItem.module.css";
+import Wrapper from "../../components/Layout/Wrapper";
+import Title from "../../components/Text/Title";
+
 const SubscriptionPage = () => {
-  const [userInfo, setUserInfo] = useState({});
+  return (<>
+    <Wrapper>
+        <Title className="section">Subscriptions</Title>
+        <SubscriptionList/>
 
-  var bearer = localStorage.getItem("SavedToken");
-
-  useEffect(() => {
-    const config = {
-      headers: {
-        Authorization: `${bearer}`,
-      },
-    };
-
-    if (bearer) {
-      // get all subscription data
-
-      axios
-        .get(`${process.env.REACT_APP_BACKEND_URL}subscriptions`, config)
-        .then((res) => {
-          console.log(res.data);
-          const data = res.data;
-          setUserInfo({
-            fname: data.first_name ? data.first_name : "",
-            lname: data.last_name ? data.last_name : "",
-            email: data.email ? data.email : "",
-            phone: data.phone_number ? data.phone_number * 1 : "",
-            avatar: data.avatar ? data.avatar : "",
-          });
-        });
-    }
-  }, [bearer]);
-
-  const [form, setForm] = useState("profile");
-
-  const selectHandler = (event) => {
-    setForm(event.target.value);
-  };
-  return <h2>This is SubscriptionPage</h2>;
+    </Wrapper>
+    </>)
 };
 
 export default SubscriptionPage;
