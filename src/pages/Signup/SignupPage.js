@@ -22,7 +22,7 @@ const SignupPage = () => {
     formData.append("avatar", selectedImage);
     formData.append("username", username);
     formData.append("email", email);
-    formData.append("password", password2);
+    formData.append("password", password);
     formData.append("password2", password2);
     formData.append("phone_number", phone_number);
     formData.append("first_name", first_name);
