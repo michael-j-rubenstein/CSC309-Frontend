@@ -1,5 +1,5 @@
 import Hero from "../../components/Hero/Hero";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Wrapper from "../../components/Layout/Wrapper";
 import LocationInput from "../../components/Forms/LocationInput";
 import Title from "../../components/Text/Title";
@@ -22,6 +22,29 @@ const HomePage = () => {
     classes: "",
     coaches: "",
   });
+
+  useEffect(() => {
+    const config = {
+      headers: {
+        Authorization: localStorage.getItem("SavedToken"),
+      },
+    };
+
+    axios
+      .post(
+        `${process.env.REACT_APP_BACKEND_URL}studios/`,
+        {
+          latitude: 43.6532,
+          longitude: -79.3832,
+        },
+        config
+      )
+      .then((res) => {
+        setStudios(res.data);
+        console.log(res.data);
+      });
+    setSearched(true);
+  }, []);
 
   const locationSubmitHandler = async (event) => {
     event.preventDefault();
@@ -46,6 +69,8 @@ const HomePage = () => {
       filterData.classes.length === 0 ? [] : filterData.classes.split(",");
     const coachArray =
       filterData.coaches.length === 0 ? [] : filterData.coaches.split(",");
+
+    console.log(filterData);
 
     axios
       .post(

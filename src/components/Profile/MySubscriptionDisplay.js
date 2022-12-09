@@ -200,7 +200,7 @@ const MySubscriptionDisplay = () => {
   );
 
   const subscription =
-    Object.keys(subData).length === 0 ? (
+    Object.keys(subData).length === 2 ? (
       <Card className={styles.wrapper}>
         <h2 className={styles.error}>
           You do not have an active subscription!

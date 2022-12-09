@@ -16,7 +16,7 @@ const StudioPage = () => {
   const { id } = useParams();
   const [searchParams] = useSearchParams();
   const user_lat = searchParams.get("user_lat", "");
-  const user_long = searchParams.get("user_long");
+  const user_long = searchParams.get("user_long", "");
   const [name, setName] = useState();
   const [phone, setPhone] = useState();
   const [address, setAddress] = useState();

@@ -27,6 +27,8 @@ const ClassesItem = (ClassData) => {
         alert("Enrolled Successfully!");
       })
       .catch((err) => {
+        console.log(err);
+        console.log(token);
         alert("Enrollment failed! Login as a subscribed user first!");
       });
   };

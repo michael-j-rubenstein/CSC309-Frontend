@@ -151,10 +151,11 @@ const MyInfoInput = (props) => {
           }`}
           type="file"
           onChange={(event) => {
-            console.log(event.target.files[0]);
+            // console.log(event.target.files[0]);
             setSelectedImage(event.target.files[0]);
           }}
           disabled={props.disabled}
+          accept="image/*"
         />
       </div>
 

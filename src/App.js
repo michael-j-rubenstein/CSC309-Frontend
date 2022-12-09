@@ -19,11 +19,15 @@ function App() {
 
           <Route path="me/" element={<MePage />} />
           <Route path="subscription/" element={<SubscriptionPage />} />
+          <Route
+            path="subscription/success/:id/"
+            element={<SubscriptionPage />}
+          />
           <Route path="admin/" element={<AdminPage />} />
         </Route>
         <Route path="/login/" element={<LoginPage />} />
         <Route path="/signup/" element={<SignupPage />} />
-        <Route path="/studio/:id/" element={<StudioPage/>} />
+        <Route path="/studio/:id/" element={<StudioPage />} />
       </Routes>
     </BrowserRouter>
   );

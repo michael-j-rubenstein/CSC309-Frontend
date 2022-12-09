@@ -12,6 +12,7 @@ import axios from "axios";
 
 const MePage = () => {
   const [userInfo, setUserInfo] = useState({});
+  const [signedIn, setSignedIn] = useState(false);
 
   var bearer = localStorage.getItem("SavedToken");
 
@@ -24,7 +25,7 @@ const MePage = () => {
 
     if (bearer) {
       // get classes data
-
+      setSignedIn(true);
       axios
         .get(`${process.env.REACT_APP_BACKEND_URL}accounts/me/`, config)
         .then((res) => {
@@ -84,7 +85,7 @@ const MePage = () => {
     <Wrapper>
       <Title className="section">My Information</Title>
       <MeInputSelector selectHandler={selectHandler}></MeInputSelector>
-      {currForm}
+      {signedIn ? currForm : <h2>Please sign in to see profile details</h2>}
       <Title className="section">Enrolled Classes</Title>
       <ClassList></ClassList>
       <Title className="section">Upcoming Invoice</Title>

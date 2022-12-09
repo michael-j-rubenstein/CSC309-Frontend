@@ -52,3 +52,12 @@
 .btn {
     font-size: 1.1rem;
 }
+
+.btn.disabled.disabled {
+    text-decoration: line-through;
+    cursor: default;
+}
+
+.btn.disabled.disabled:hover {
+    color: rgb(113, 113, 113);
+}

@@ -1,7 +1,7 @@
 
 .header {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 11%;
+    grid-template-columns: 1fr 1fr 1fr 10%;
     padding: 0 2rem;
     border-collapse: collapse;
 }
@@ -24,4 +24,10 @@
 
 .alert {
     text-align: center;
+}
+
+.msg {
+    text-align: center;
+    margin: 2rem 0;
+    text-decoration: underline;
 }

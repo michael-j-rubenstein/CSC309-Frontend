@@ -54,7 +54,15 @@ const LocationInput = (props) => {
           className={styles["btn-hide-options"]}
           btnColor="plain"
           type="button"
-          onClick={() => setShowOptions(false)}
+          onClick={() => {
+            setShowOptions(false);
+            props.setFilterData({
+              name: "",
+              amenities: "",
+              classes: "",
+              coaches: "",
+            });
+          }}
         >
           Hide Filter Options
         </Button>
@@ -95,7 +103,9 @@ const LocationInput = (props) => {
             className={styles["btn-show-options"]}
             btnColor="plain"
             type="button"
-            onClick={() => setShowOptions(true)}
+            onClick={() => {
+              setShowOptions(true);
+            }}
           >
             Show More Filter Options
           </Button>

@@ -16,7 +16,7 @@ const CustomMap = ({ google, locations = [], userLocation }) => {
         }}
         center={userLocation}
         initialCenter={userLocation}
-        zoom={locations.length === 1 ? 18 : 13}
+        zoom={13}
         disableDefaultUI={true}
       >
         {locations.map((coords, index) => (
