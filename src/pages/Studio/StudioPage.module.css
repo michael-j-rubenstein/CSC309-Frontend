@@ -21,3 +21,41 @@
     color: #222222;
     cursor: pointer;
 }
+
+.label {
+    font-size: 1.5rem;
+}
+.label::after {
+    content: ":"
+}
+
+.input {
+    background: none;
+	border: 1px solid #ccc;
+	border-radius: 6px;
+    width: 96.5%;
+	outline: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+    font-size: 1.5rem;
+    padding: 0.5rem 1.2rem;
+    margin: 0.5rem 0 2rem;
+    font-family: inherit;
+}
+
+.btn-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0 3rem;
+    gap: 5rem;
+}
+
+.btn-wrapper .submit-btn {
+    font-size: 1.5rem;
+}
+
+.btn-wrapper .submit-btn:hover {
+    padding-bottom: 0.3rem;
+    border-bottom: 2px solid #222222;
+}

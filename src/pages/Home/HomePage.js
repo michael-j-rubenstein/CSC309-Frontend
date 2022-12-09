@@ -80,7 +80,22 @@ const HomePage = () => {
 
   studio_list = studio_list.map((studio_name) => {
     const data = studios[`${studio_name}`];
-    return <StudioItem key={data.id} data={{ ...data }}></StudioItem>;
+    return (
+      <StudioItem
+        key={data.id}
+        data={{
+          ...data,
+          user_lat:
+            latInputRef.current.value !== ""
+              ? latInputRef.current.value * 1
+              : 43.6532,
+          user_long:
+            longInputRef.current.value !== ""
+              ? longInputRef.current.value * 1
+              : -79.3832,
+        }}
+      ></StudioItem>
+    );
   });
 
   const error_message = searched ? (
