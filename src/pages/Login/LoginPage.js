@@ -3,11 +3,10 @@ import styles from "./LoginPage.module.css";
 import axios from "axios";
 import React, { useState, useRef } from "react";
 
-
 const LoginPage = () => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [errMsg, setErrMsg] = useState('');
+  const [errMsg, setErrMsg] = useState("");
   const errRef = useRef();
 
   const navigate = useNavigate();
@@ -33,16 +32,13 @@ const LoginPage = () => {
       })
       .catch(function (err, values) {
         if (!err?.response) {
-          setErrMsg('No Server Response');
-        }
-        else if (err.response?.status === 400) {
-          setErrMsg('Missing Username or Password');
-        } 
-        else if (err.response?.status === 401) {
-          setErrMsg('Unauthorized: Username and/or Password is Incorrect');
-        } 
-        else {
-          setErrMsg('Login Failed');
+          setErrMsg("No Server Response");
+        } else if (err.response?.status === 400) {
+          setErrMsg("Missing Username or Password");
+        } else if (err.response?.status === 401) {
+          setErrMsg("Unauthorized: Username and/or Password is Incorrect");
+        } else {
+          setErrMsg("Login Failed");
         }
         errRef.current.focus();
       });
@@ -56,7 +52,13 @@ const LoginPage = () => {
         </Link>
       </div>
       <form className={styles.form} onSubmit={LoginPage}>
-      <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+        <p
+          ref={errRef}
+          className={errMsg ? styles["errmsg"] : ""}
+          aria-live="assertive"
+        >
+          {errMsg}
+        </p>
         <div className={styles["form-content"]}>
           <h1 className={styles["form-title"]}>Please sign in</h1>
           <input
@@ -78,8 +80,7 @@ const LoginPage = () => {
             Don't have an account?
           </Link>
 
-          <button 
-          className={styles["form-btn"]}>Sign in</button>
+          <button className={styles["form-btn"]}>Sign in</button>
           <p className={styles["copyright-tag"]}>
             Copyright Toronto Fitness Club &copy; 2022
           </p>
