@@ -27,13 +27,13 @@ const MyInfoInput = (props) => {
     if (form.current[3].value !== "")
       formData.append("phone_number", form.current[3].value);
 
-    const password1 = form.current[4].value;
-    const password2 = form.current[5].value;
+    // const password1 = form.current[4].value;
+    // const password2 = form.current[5].value;
 
-    if (password1 !== "" && password1 === password2 && password1.length >= 0) {
-      formData.append("password", password1);
-      formData.append("password2", password2);
-    }
+    // if (password1 !== "" && password1 === password2 && password1.length >= 0) {
+    //   formData.append("password", password1);
+    //   formData.append("password2", password2);
+    // }
 
     if (selectedImage) formData.append("avatar", selectedImage);
 
@@ -99,7 +99,8 @@ const MyInfoInput = (props) => {
         disabled={props.disabled}
       />
 
-      {!props.disabled ? (
+      {/* Made it unable to change passwords */}
+      {/* {!props.disabled ? (
         <>
           <label className={styles.label} htmlFor="password">
             Password (does not change if left blank)
@@ -125,7 +126,7 @@ const MyInfoInput = (props) => {
         </>
       ) : (
         <></>
-      )}
+      )} */}
 
       <label className={styles.label} htmlFor="avatar">
         Avatar
