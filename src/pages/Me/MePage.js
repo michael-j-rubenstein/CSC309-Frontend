@@ -29,7 +29,7 @@ const MePage = () => {
       axios
         .get(`${process.env.REACT_APP_BACKEND_URL}accounts/me/`, config)
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           const data = res.data;
           setUserInfo({
             fname: data.first_name ? data.first_name : "",

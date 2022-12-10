@@ -8,8 +8,6 @@ const StudioItem = (props) => {
 
   const navigate = useNavigate();
 
-  console.log(props.data);
-
   const toStudio = () => {
     // navigate(`/studio/${id}/`, {
     //   id: id,

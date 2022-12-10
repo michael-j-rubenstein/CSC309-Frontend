@@ -51,7 +51,7 @@ const MySubscriptionDisplay = () => {
             " " +
             end_date.getFullYear();
 
-          console.log(res.data);
+          // console.log(res.data);
           setSubData({
             ...res.data,
             period_start: start_date_str,
@@ -236,7 +236,7 @@ const MySubscriptionDisplay = () => {
                 Unsubscribe
               </Button>
             ) : (
-              <p className={styles.notice}>Unsubscribed</p>
+              <p className={styles.notice}>Active till subscription end date</p>
             )}
           </div>
         </Card>

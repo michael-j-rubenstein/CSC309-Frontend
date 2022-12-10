@@ -42,14 +42,14 @@ const SubscriptionItem = (props) => {
 
   return (
     <div className={styles.item}>
-      <h5 className={styles["title2"]}>{data.name}</h5>
+      <h5 className={styles["title1"]}>{data.name}</h5>
       <div>
         <h3 className={styles["title2"]}>
           ${data.amount} {`/ ${data.type}`}
         </h3>
       </div>
       <h3 className={styles["title2"]}>
-        {data.type === "M" ? "Montly" : "Annual"}
+        {data.type === "M" ? "Monthly" : "Annual"}
       </h3>
 
       <div className={styles.btns}>
@@ -59,7 +59,7 @@ const SubscriptionItem = (props) => {
           onClick={() => SubscribeHandler()}
           disabled={hasSub}
         >
-          Enroll
+          Subscribe
         </Button>
       </div>
     </div>

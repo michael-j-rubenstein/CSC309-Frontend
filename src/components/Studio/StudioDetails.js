@@ -3,7 +3,7 @@ import Button from "../UI/Button";
 import styles from "./StudioDetails.module.css";
 
 const StudioDetails = (props) => {
-  console.log(props.data);
+  //   console.log(props.data);
 
   const url =
     "http://maps.google.com/maps/dir/" +
@@ -13,7 +13,7 @@ const StudioDetails = (props) => {
     "/" +
     props.data.urlDest;
 
-  console.log(url);
+  //   console.log(url);
 
   return (
     <div>

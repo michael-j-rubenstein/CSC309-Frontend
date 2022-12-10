@@ -42,10 +42,19 @@ const SignupPage = () => {
         navigate("/login");
       })
       .catch(function (err) {
+        console.log(err.response.data.username);
         if (!err?.response) {
           setErrMsg("No Server Response");
         } else if (err.response?.status === 400) {
-          setErrMsg("Please fill out all the fields");
+          setErrMsg(
+            `Please fill out all the fields${
+              err.response.data.username
+                ? ", \n username: " + err.response.data.username[0]
+                : ""
+            }`
+          );
+          // console.log(err.response.data.get("username"));
+          // setErrMsg(err.response.data);
         }
         errRef.current.focus();
       });
@@ -64,7 +73,7 @@ const SignupPage = () => {
       <form className={styles.form} onSubmit={SignupPage}>
         <p
           ref={errRef}
-          className={errMsg ? "errmsg" : "offscreen"}
+          className={errMsg ? styles["errmsg"] : ""}
           aria-live="assertive"
         >
           {errMsg}

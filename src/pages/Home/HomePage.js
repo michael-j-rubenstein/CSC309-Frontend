@@ -41,7 +41,7 @@ const HomePage = () => {
       )
       .then((res) => {
         setStudios(res.data);
-        console.log(res.data);
+        // console.log(res.data);
       });
     setSearched(true);
   }, []);
@@ -70,7 +70,7 @@ const HomePage = () => {
     const coachArray =
       filterData.coaches.length === 0 ? [] : filterData.coaches.split(",");
 
-    console.log(filterData);
+    // console.log(filterData);
 
     axios
       .post(
@@ -88,7 +88,7 @@ const HomePage = () => {
       )
       .then((res) => {
         setStudios(res.data);
-        console.log(res.data);
+        // console.log(res.data);
       });
     setSearched(true);
   };
