@@ -43,3 +43,7 @@
 .highlight {
     font-weight: 500;
 }
+
+.btn-link {
+    text-decoration: none;
+}
